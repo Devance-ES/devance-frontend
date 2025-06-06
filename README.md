@@ -3,8 +3,8 @@ Este projeto visa digitalizar o Formulário Nacional de Avaliação de Risco par
 
 ## 🛠️ Construído com
 
-* [Springboot](https://spring.io/projects/spring-boot) - O framework web usado
-* [Maven](https://maven.apache.org/) - Gerente de Dependência
+* [React](https://code.visualstudio.com/) - Biblioteca JavaScript
+* [NPM](https://npmjs.com/) - Gerenciador de Pacotes
 * [VSCode](https://code.visualstudio.com/) - IDE usada pelo time
 
 ## ✒️ Autores
