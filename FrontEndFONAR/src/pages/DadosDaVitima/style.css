@@ -224,6 +224,16 @@ select:focus {
     border-color: #8e44ad;
 }
 
+/* Adicionado: cursor pointer para idade, nacionalidade e escolaridade */
+select[name="nacionalidade"]:hover,
+select[name="escolaridade"]:hover {
+    cursor: pointer;
+}
+
+#idade {
+    cursor: pointer;
+}
+
 .btn-avancar {
     margin: 40px auto 0 auto;
     display: block;
