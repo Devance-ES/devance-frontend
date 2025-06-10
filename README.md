@@ -1,5 +1,6 @@
 # Devance - FONAR
-Este projeto visa digitalizar o Formulário Nacional de Avaliação de Risco para permitir a modernização do processo, a coleta de dados e o seu uso na criaçaõ de políticas públicas edicientes e possibilitar uma defesa mais sistemática, precisa, robusta e séria da mulher brasileira.
+Este projeto tem como objetivo principal a digitalização do Formulário Nacional de Avaliação de Risco (FONAR), atualmente preenchido exclusivamente em formato físico. A proposta visa padronizar, centralizar e ampliar o acesso às informações relativas ao risco de violência contra a mulher, promovendo maior eficácia no acompanhamento dos casos e na formulação de políticas públicas preventivas.
+
 
 ## 🛠️ Construído com
 
