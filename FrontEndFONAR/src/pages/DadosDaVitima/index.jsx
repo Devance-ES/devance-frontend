@@ -80,10 +80,9 @@ const DadosDaVitima = () => {
                                 <label htmlFor="idade">Idade da Vítima<span className="required">*</span></label>
                                 <select id="idade" name="idade" required>
                                     <option value="">Selecione</option>
-                                    <option value="0-12">0-12</option>
-                                    <option value="13-17">13-17</option>
-                                    <option value="18-59">18-59</option>
-                                    <option value="60+">60+</option>
+                                    {Array.from({ length: 131 }, (_, i) => (
+                                        <option key={i} value={i}>{i}</option>
+                                    ))}
                                 </select>
                             </div>
                             <div className="form-group">
