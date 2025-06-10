@@ -7,10 +7,7 @@ const MenuLateral = ({ aberto, onToggle }) => (
             <span className="menu-icone">&#9776;</span>
         </button>
         <nav className="menu-links">
-            <a href="#">Início</a>
-            <a href="#">Formulários</a>
-            <a href="#">Relatórios</a>
-            <a href="#">Configurações</a>
+
         </nav>
     </aside>
 );
