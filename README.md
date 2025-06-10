@@ -10,7 +10,7 @@ Este projeto tem como objetivo principal a digitalização do Formulário Nacion
 
 ## ✒️ Autores
 
-* **Alison Guilherme da Silva Ferreira** 
+* **Alion Guilherme da Silva Ferreira** 
 * **Antônio Chaves Patriota**
 * **João Pedro Oliveira da Silva**
 * **Juarez Damião Lopes Filho** 
