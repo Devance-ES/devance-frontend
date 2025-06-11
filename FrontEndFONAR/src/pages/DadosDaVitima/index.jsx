@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './style.css';
 
 const MenuLateral = ({ aberto, onToggle }) => (
@@ -52,6 +53,12 @@ const Etapas = () => (
 
 const DadosDaVitima = () => {
     const [menuAberto, setMenuAberto] = useState(false);
+    const navigate = useNavigate();
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        navigate('bloco1/page1'); // Caminho da próxima página
+    };
 
     return (
         <div className="pagina-fonar">
@@ -67,7 +74,7 @@ const DadosDaVitima = () => {
                     <span>Vínculo entre as partes</span>
                 </div>
                 <div className="form-container">
-                    <form>
+                    <form onSubmit={handleSubmit}>
                         <div className="form-group">
                             <label htmlFor="nome">Nome da vítima<span className="required">*</span></label>
                             <input type="text" id="nome" name="nome" placeholder="Digite o nome da vítima" required />
