@@ -7,9 +7,7 @@ const MenuLateral = ({ aberto, onToggle }) => (
         <button className="btn-menu" onClick={onToggle}>
             <span className="menu-icone">&#9776;</span>
         </button>
-        <nav className="menu-links">
-
-        </nav>
+        <nav className="menu-links"></nav>
     </aside>
 );
 
@@ -57,7 +55,8 @@ const DadosDaVitima = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        navigate('bloco1/page1'); // Caminho da próxima página
+        // Corrija o caminho para incluir a barra inicial
+        navigate('/bloco1/page1');
     };
 
     return (
