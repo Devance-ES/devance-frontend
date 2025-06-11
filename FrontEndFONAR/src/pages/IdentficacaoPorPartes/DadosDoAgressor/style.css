@@ -155,10 +155,10 @@
     margin: 0 8px;
 }
 
-/* Breadcrumbs alinhado à esquerda e com espaçamento igual ao formulário */
+/* Breadcrumbs */
 .breadcrumbs {
-    font-size: 14px;
-    color: #888;
+    font-size: 16px;
+    color: #222;
     margin-left: 0;
     margin-bottom: 40px;
     margin-top: 32px;
@@ -172,12 +172,13 @@
 }
 
 .active-breadcrumb {
+    color: #8e44ad;
     font-weight: 600;
-    color: #191919;
 }
 
 .breadcrumb-sep {
     margin: 0 4px;
+    color: #888;
 }
 
 .form-container {
@@ -234,13 +235,12 @@ select:focus {
     border-color: #8e44ad;
 }
 
-/* Adicionado: cursor pointer para idade, nacionalidade e escolaridade */
-select[name="nacionalidade"]:hover,
-select[name="escolaridade"]:hover {
+select[name="nacionalidade-agressor"]:hover,
+select[name="escolaridade-agressor"]:hover {
     cursor: pointer;
 }
 
-#idade {
+#idade-agressor {
     cursor: pointer;
 }
 

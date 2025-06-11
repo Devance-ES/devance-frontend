@@ -49,14 +49,14 @@ const Etapas = () => (
     </div>
 );
 
-const DadosDaVitima = () => {
+const DadosDoAgressor = () => {
     const [menuAberto, setMenuAberto] = useState(false);
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Redireciona para a tela de DadosDoAgressor
-        navigate('/identificacaoporpartes/dadosdoagressor');
+        // Avança para o próximo passo, ajuste o caminho conforme seu fluxo
+        navigate('/identificacaoporpartes/vinculoentrepartes');
     };
 
     return (
@@ -66,22 +66,22 @@ const DadosDaVitima = () => {
                 <h1 className="titulo-fonar">Formulário FONAR</h1>
                 <Etapas />
                 <div className="breadcrumbs">
-                    <span className="active-breadcrumb">Dados da vítima</span>
+                    <span>Dados da vítima</span>
                     <span className="breadcrumb-sep">{' > '}</span>
-                    <span>Dados do Agressor</span>
+                    <span className="active-breadcrumb">Dados do Agressor</span>
                     <span className="breadcrumb-sep">{' > '}</span>
                     <span>Vínculo entre as partes</span>
                 </div>
                 <div className="form-container">
                     <form onSubmit={handleSubmit}>
                         <div className="form-group">
-                            <label htmlFor="nome">Nome da vítima<span className="required">*</span></label>
-                            <input type="text" id="nome" name="nome" placeholder="Digite o nome da vítima" required />
+                            <label htmlFor="nome-agressor">Nome do agressor<span className="required">*</span></label>
+                            <input type="text" id="nome-agressor" name="nome-agressor" placeholder="Digite o nome do agressor" required />
                         </div>
                         <div className="form-row">
                             <div className="form-group">
-                                <label htmlFor="idade">Idade da Vítima<span className="required">*</span></label>
-                                <select id="idade" name="idade" required>
+                                <label htmlFor="idade-agressor">Idade do agressor<span className="required">*</span></label>
+                                <select id="idade-agressor" name="idade-agressor" required>
                                     <option value="">Selecione</option>
                                     {Array.from({ length: 131 }, (_, i) => (
                                         <option key={i} value={i}>{i}</option>
@@ -89,8 +89,8 @@ const DadosDaVitima = () => {
                                 </select>
                             </div>
                             <div className="form-group">
-                                <label htmlFor="escolaridade">Escolaridade<span className="required">*</span></label>
-                                <select id="escolaridade" name="escolaridade" required>
+                                <label htmlFor="escolaridade-agressor">Escolaridade<span className="required">*</span></label>
+                                <select id="escolaridade-agressor" name="escolaridade-agressor" required>
                                     <option value="">Selecione</option>
                                     <option value="fundamental-incompleto">Fundamental Incompleto</option>
                                     <option value="fundamental-completo">Fundamental Completo</option>
@@ -101,8 +101,8 @@ const DadosDaVitima = () => {
                                 </select>
                             </div>
                             <div className="form-group">
-                                <label htmlFor="nacionalidade">Nacionalidade<span className="required">*</span></label>
-                                <select id="nacionalidade" name="nacionalidade" required>
+                                <label htmlFor="nacionalidade-agressor">Nacionalidade<span className="required">*</span></label>
+                                <select id="nacionalidade-agressor" name="nacionalidade-agressor" required>
                                     <option value="">Selecione</option>
                                     <option value="brasileira">Brasileira</option>
                                     <option value="estrangeira">Estrangeira</option>
@@ -117,4 +117,4 @@ const DadosDaVitima = () => {
     );
 };
 
-export default DadosDaVitima;
+export default DadosDoAgressor;

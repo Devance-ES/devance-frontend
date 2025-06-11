@@ -52,20 +52,6 @@
     pointer-events: auto;
 }
 
-.menu-links a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 1.1rem;
-    margin-bottom: 18px;
-    transition: text-decoration 0.2s, color 0.2s;
-    font-weight: 500;
-}
-
-.menu-links a:hover {
-    text-decoration: underline;
-    color: #e1bee7;
-}
-
 .dados-da-vitima {
     margin-left: 72px;
     width: 100%;
@@ -119,12 +105,10 @@
     transition: background 0.2s;
 }
 
-/* Círculo ativo agora é preto */
 .etapa.active span {
-    background: #191919;
+    background: #8e44ad;
 }
 
-/* Título ativo agora é preto e sem fundo */
 .etapa-titulo {
     font-size: 14px;
     color: #191919;
@@ -136,29 +120,27 @@
 }
 
 .etapa-titulo.ativo {
-    color: #191919 !important;
+    color: #8e44ad !important;
     font-weight: 600;
     background: transparent !important;
 }
 
-/* Remove qualquer fundo do título ativo, caso algum elemento filho tenha */
 .etapa-titulo.ativo,
 .etapa-titulo.ativo * {
     background: transparent !important;
 }
 
 .linha {
-    width: 56px;
+    width: 120px;
     height: 4px;
     background: #191919;
     border-radius: 2px;
     margin: 0 8px;
 }
 
-/* Breadcrumbs alinhado à esquerda e com espaçamento igual ao formulário */
 .breadcrumbs {
-    font-size: 14px;
-    color: #888;
+    font-size: 16px;
+    color: #222;
     margin-left: 0;
     margin-bottom: 40px;
     margin-top: 32px;
@@ -172,12 +154,13 @@
 }
 
 .active-breadcrumb {
+    color: #8e44ad;
     font-weight: 600;
-    color: #191919;
 }
 
 .breadcrumb-sep {
     margin: 0 4px;
+    color: #888;
 }
 
 .form-container {
@@ -201,13 +184,8 @@ form {
     margin-bottom: 0;
 }
 
-.form-row {
-    display: flex;
-    gap: 24px;
-}
-
 label {
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 600;
     color: #191919;
     margin-bottom: 8px;
@@ -218,30 +196,20 @@ label {
     margin-left: 2px;
 }
 
-input[type="text"],
-select {
-    padding: 10px 12px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
+input[type="text"] {
+    padding: 12px 12px;
+    border: none;
+    border-bottom: 2px solid #bbb;
+    border-radius: 0;
     font-size: 16px;
-    background: #f6f6f6;
+    background: #fff;
     margin-bottom: 0;
+    transition: border-color 0.2s;
 }
 
-input[type="text"]:focus,
-select:focus {
-    outline: 2px solid #8e44ad;
-    border-color: #8e44ad;
-}
-
-/* Adicionado: cursor pointer para idade, nacionalidade e escolaridade */
-select[name="nacionalidade"]:hover,
-select[name="escolaridade"]:hover {
-    cursor: pointer;
-}
-
-#idade {
-    cursor: pointer;
+input[type="text"]:focus {
+    outline: none;
+    border-bottom: 2px solid #8e44ad;
 }
 
 .btn-avancar {
@@ -283,11 +251,6 @@ select[name="escolaridade"]:hover {
     .dados-da-vitima {
         margin-left: 0;
         padding: 0 8px 40px 8px;
-    }
-
-    .form-row {
-        flex-direction: column;
-        gap: 16px;
     }
 
     .form-container {
