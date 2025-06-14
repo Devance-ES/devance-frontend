@@ -51,7 +51,7 @@ const Etapas = () => (
     </div>
 );
 
-const FormularioPage2 = () => {
+const FormularioBloco1Pagina2 = () => {
     const [menuAberto, setMenuAberto] = useState(false);
     const [outrasAgressoes, setOutrasAgressoes] = useState([]);
     const [sexoForcado, setSexoForcado] = useState('');
@@ -209,4 +209,4 @@ const FormularioPage2 = () => {
     );
 };
 
-export default FormularioPage2;
+export default FormularioBloco1Pagina2;

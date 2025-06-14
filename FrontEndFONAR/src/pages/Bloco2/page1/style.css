@@ -1,0 +1,143 @@
+/* Layout principal */
+.formulario-fonar {
+    background: #fff;
+    min-height: 100vh;
+    padding: 40px 0 0 0;
+    font-family: 'Roboto', Arial, sans-serif;
+}
+
+/* Stepper */
+.stepper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 32px;
+    gap: 32px;
+}
+
+.stepper-etapa {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stepper-circulo {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #7c3aed;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin-bottom: 4px;
+    font-size: 18px;
+}
+
+.stepper-circulo.inativo {
+    background: #222;
+}
+
+.stepper-label {
+    font-size: 13px;
+    color: #7c3aed;
+    text-align: center;
+}
+
+.stepper-label.inativo {
+    color: #222;
+}
+
+.stepper-linha {
+    width: 48px;
+    height: 3px;
+    background: #7c3aed;
+    margin: 0 8px;
+    border-radius: 2px;
+}
+
+.stepper-linha.inativa {
+    background: #222;
+}
+
+/* Título */
+.formulario-fonar h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 32px;
+    font-weight: 500;
+}
+
+/* Perguntas */
+.question-radio-group {
+    margin-bottom: 32px;
+}
+
+.question-radio-group label {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 12px;
+}
+
+.radio-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.radio-options label {
+    font-weight: 400;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+/* Navegação */
+.form-navigation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    margin-top: 32px;
+}
+
+.form-navigation button {
+    background: #7c3aed;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 18px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.form-navigation button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+.form-navigation .pagina-atual {
+    font-weight: bold;
+    color: #7c3aed;
+    margin: 0 8px;
+}
+
+/* Responsividade */
+@media (max-width: 700px) {
+    .formulario-fonar {
+        padding: 16px 0 0 0;
+    }
+
+    .stepper {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .stepper-linha {
+        width: 3px;
+        height: 24px;
+        margin: 8px 0;
+    }
+}

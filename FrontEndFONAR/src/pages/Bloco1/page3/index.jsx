@@ -51,7 +51,7 @@ const Etapas = () => (
     </div>
 );
 
-const FormularioPage3 = () => {
+const FormularioBloco1Pagina3 = () => {
     const [menuAberto, setMenuAberto] = useState(false);
 
     // Controle para permitir apenas uma opção nas duas últimas perguntas
@@ -266,4 +266,4 @@ const FormularioPage3 = () => {
     );
 };
 
-export default FormularioPage3;
+export default FormularioBloco1Pagina3;

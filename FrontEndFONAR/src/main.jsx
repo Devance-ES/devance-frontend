@@ -4,9 +4,10 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import DadosDaVitima from './pages/IdentficacaoPorPartes/DadosDaVitima';
 import DadosDoAgressor from './pages/IdentficacaoPorPartes/DadosDoAgressor';
 import VinculoEntrePartes from './pages/IdentficacaoPorPartes/VinculeEntrePartes';
-import FormularioPage1 from './pages/Bloco1/page1';
-import FormularioPage2 from './pages/Bloco1/page2';
-import FormularioPage3 from './pages/Bloco1/page3';
+import FormularioBloco1Pagina1 from './pages/Bloco1/page1';
+import FormularioBloco1Pagina2 from './pages/Bloco1/page2';
+import FormularioBloco1Pagina3 from './pages/Bloco1/page3';
+
 
 function App() {
   return (
@@ -14,9 +15,10 @@ function App() {
       <Route path="/identificacaoporpartes/dadosdavitima" element={<DadosDaVitima />} />
       <Route path="/identificacaoporpartes/dadosdoagressor" element={<DadosDoAgressor />} />
       <Route path="/identificacaoporpartes/vinculoentrepartes" element={<VinculoEntrePartes />} />
-      <Route path="/bloco1/page1" element={<FormularioPage1 />} />
-      <Route path="/bloco1/page2" element={<FormularioPage2 />} />
-      <Route path="/bloco1/page3" element={<FormularioPage3 />} />
+      <Route path="/bloco1/page1" element={<FormularioBloco1Pagina1 />} />
+      <Route path="/bloco1/page2" element={<FormularioBloco1Pagina2 />} />
+      <Route path="/bloco1/page3" element={<FormularioBloco1Pagina3 />} />
+      <Route path="/bloco2/page1" element={<FormularioPage3 />} />
     </Routes>
   );
 }
