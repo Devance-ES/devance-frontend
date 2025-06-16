@@ -1,143 +1,429 @@
-/* Layout principal */
-.formulario-fonar {
+/* General Layout */
+body {
+    margin: 0;
+    font-family: 'Inter', Arial, sans-serif;
+    /* Adopt Inter font if available */
+    background: #f0f2f5;
+    /* Light grey background for the whole page */
+}
+
+.pagina-fonar {
+    display: flex;
+    min-height: 100vh;
+    background: #fff;
+    /* White background for the main content area */
+}
+
+/* Sidebar Menu */
+.menu-lateral {
+    width: 72px;
+    background: #8e44ad;
+    /* Darker purple */
+    min-height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    transition: width 0.2s;
+}
+
+.menu-lateral.aberto {
+    width: 220px;
+}
+
+.btn-menu {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 2rem;
+    margin: 18px 0 18px 18px;
+    cursor: pointer;
+    outline: none;
+}
+
+.menu-icone {
+    font-size: 2rem;
+}
+
+.menu-links {
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+    width: 100%;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+    padding-left: 18px;
+}
+
+.menu-lateral.aberto .menu-links {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Main Content Area */
+.dados-da-vitima {
+    margin-left: 72px;
+    /* Adjust margin for collapsed sidebar */
+    width: 100%;
     background: #fff;
     min-height: 100vh;
-    padding: 40px 0 0 0;
-    font-family: 'Roboto', Arial, sans-serif;
+    padding: 0 40px 40px 40px;
+    font-family: 'Inter', Arial, sans-serif;
+    transition: margin-left 0.2s;
 }
 
-/* Stepper */
-.stepper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.menu-lateral.aberto+.dados-da-vitima {
+    margin-left: 220px;
+    /* Adjust margin for expanded sidebar */
+}
+
+
+.titulo-fonar {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 600;
+    margin-top: 40px;
+    margin-bottom: 16px;
+    color: #191919;
+}
+
+/* Etapas (Steps) */
+.etapas-container {
+    margin-top: 32px;
     margin-bottom: 32px;
-    gap: 32px;
 }
 
-.stepper-etapa {
+.etapas {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-bottom: 16px;
+    justify-content: center;
+}
+
+.etapa {
     display: flex;
     flex-direction: column;
     align-items: center;
+    min-width: 90px;
+    /* NEW: Ensure no pointer cursor on step itself */
+    cursor: default;
 }
 
-.stepper-circulo {
+.etapa span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    background: #7c3aed;
+    background: #191919;
+    /* Default step circle background */
     color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    margin-bottom: 4px;
+    font-weight: 600;
     font-size: 18px;
-}
-
-.stepper-circulo.inativo {
-    background: #222;
-}
-
-.stepper-label {
-    font-size: 13px;
-    color: #7c3aed;
-    text-align: center;
-}
-
-.stepper-label.inativo {
-    color: #222;
-}
-
-.stepper-linha {
-    width: 48px;
-    height: 3px;
-    background: #7c3aed;
-    margin: 0 8px;
-    border-radius: 2px;
-}
-
-.stepper-linha.inativa {
-    background: #222;
-}
-
-/* Título */
-.formulario-fonar h2 {
-    text-align: center;
-    font-size: 2rem;
-    margin-bottom: 32px;
-    font-weight: 500;
-}
-
-/* Perguntas */
-.question-radio-group {
-    margin-bottom: 32px;
-}
-
-.question-radio-group label {
-    display: block;
-    font-size: 1.1rem;
-    font-weight: 500;
-    margin-bottom: 12px;
-}
-
-.radio-options {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.radio-options label {
-    font-weight: 400;
-    font-size: 1rem;
-    cursor: pointer;
-}
-
-/* Navegação */
-.form-navigation {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 16px;
-    margin-top: 32px;
-}
-
-.form-navigation button {
-    background: #7c3aed;
-    color: #fff;
-    border: none;
-    border-radius: 6px;
-    padding: 8px 18px;
-    font-size: 1rem;
-    cursor: pointer;
+    margin-bottom: 4px;
     transition: background 0.2s;
 }
 
-.form-navigation button:disabled {
-    background: #ccc;
-    cursor: not-allowed;
+.etapa.active span {
+    background: #8e44ad;
+    /* Active step circle background */
+    color: #fff;
 }
 
-.form-navigation .pagina-atual {
-    font-weight: bold;
-    color: #7c3aed;
+/* Styles for completed steps */
+.etapa.completed span {
+    background: #d4aef1;
+    /* Lighter purple for completed step circles */
+    color: #8e44ad;
+}
+
+/* Styles for the current section (non-clickable, but visually distinct) */
+.etapa.current-section span {
+    background: #d4aef1;
+    /* Light purple circle, matching the image */
+    color: #8e44ad;
+    /* Dark purple number */
+}
+
+.etapa.current-section .etapa-titulo {
+    color: #191919;
+    /* Dark text for the title, matching the image */
+    font-weight: 400;
+    /* Regular weight */
+}
+
+
+.etapa-titulo {
+    font-size: 14px;
+    color: #191919;
+    text-align: center;
+    font-weight: 400;
+    margin-top: 2px;
+    transition: color 0.2s;
+    min-height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.etapa-titulo.ativo {
+    color: #8e44ad;
+    /* Active step title color */
+    font-weight: 600;
+}
+
+/* Styles for completed step titles */
+.etapa.completed .etapa-titulo {
+    color: #8e44ad;
+    /* Completed step title color (same as active here, can be changed) */
+}
+
+
+.etapa-link {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    /* NEW: Ensure no pointer cursor on the link wrapping the step */
+    cursor: default;
+}
+
+/* NEW: Removed all specific hover styles for .etapa and .etapa-link.
+   If any .etapa-link exists, its text decoration and color will still be inherited,
+   but there will be no visual change on hover for the step itself. */
+/* Removed:
+.etapa:not(.current-section):hover span,
+.etapa:not(.current-section):hover .etapa-titulo {
+    background: #f0e6fa;
+    color: #8e44ad;
+    cursor: pointer;
+}
+*/
+
+
+.linha {
+    width: 56px;
+    height: 4px;
+    background: #191919;
+    /* Default line background */
+    border-radius: 2px;
     margin: 0 8px;
 }
 
-/* Responsividade */
-@media (max-width: 700px) {
-    .formulario-fonar {
-        padding: 16px 0 0 0;
-    }
+/* Styles for completed lines */
+.linha.completed {
+    background: #d4aef1;
+    /* Lighter purple for completed lines */
+}
 
-    .stepper {
+/* Form Container */
+.form-container {
+    margin-top: 0;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 180px;
+    margin-bottom: 0;
+}
+
+/* For side-by-side questions */
+.grid-2-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+}
+
+.sub-form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.pergunta {
+    font-weight: 600;
+    font-size: 18px;
+    margin-bottom: 12px;
+    color: #191919;
+}
+
+.opcoes label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    font-size: 16px;
+    /* NEW: Removed cursor: pointer from here too if options shouldn't change cursor */
+    /* If the radio/checkbox options themselves should NOT have pointer cursor on hover, remove this line: */
+    cursor: pointer;
+    /* Keep this if you want options to be clickable, remove if you want no hover at all */
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: background 0.2s, color 0.2s;
+    color: #333;
+}
+
+/* NEW: Removed hover effect from options labels if no hover is desired anywhere */
+/* Removed:
+.opcoes label:hover {
+    background: #f0e6fa;
+    color: #8e44ad;
+}
+*/
+
+.opcoes input[type="radio"],
+.opcoes input[type="checkbox"] {
+    margin-right: 8px;
+    accent-color: #8e44ad;
+    transform: scale(1.1);
+}
+
+/* PAGINAÇÃO */
+.paginacao {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    margin-top: 32px;
+}
+
+/* NEW: Keep hover and cursor for pagination buttons/links as they are interactive */
+.paginacao-btn,
+.paginacao-outro {
+    transition: background 0.2s, color 0.2s;
+    text-decoration: none;
+    cursor: pointer;
+    /* Keep pointer cursor for interactive pagination */
+}
+
+.paginacao-btn:hover,
+.paginacao-outro:hover {
+    background: #f0e6fa;
+    color: #8e44ad;
+    border-radius: 6px;
+}
+
+.paginacao-btn {
+    color: #444;
+    font-size: 18px;
+    user-select: none;
+    padding: 4px 8px;
+    border: none;
+    background: transparent;
+}
+
+.paginacao-atual {
+    background: #ddd;
+    color: #191919;
+    border-radius: 6px;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.paginacao-outro {
+    color: #888;
+    font-size: 15px;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    font-weight: 400;
+    background: transparent;
+    border: none;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 900px) {
+    .pagina-fonar {
         flex-direction: column;
-        gap: 12px;
     }
 
-    .stepper-linha {
-        width: 3px;
-        height: 24px;
-        margin: 8px 0;
+    .menu-lateral {
+        position: relative;
+        width: 100%;
+        min-height: 56px;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
     }
+
+    .menu-lateral.aberto {
+        width: 100%;
+    }
+
+    .menu-lateral.aberto .menu-links {
+        position: absolute;
+        top: 56px;
+        left: 0;
+        width: 100%;
+        background: #8e44ad;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        padding: 10px 18px;
+        box-sizing: border-box;
+    }
+
+    .dados-da-vitima {
+        margin-left: 0;
+        padding: 0 8px 40px 8px;
+    }
+
+    .form-container {
+        padding: 0 8px;
+    }
+
+    .etapas {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px 5px;
+    }
+
+    .etapa {
+        min-width: unset;
+        width: auto;
+        margin-bottom: 5px;
+    }
+
+    .linha {
+        width: 30px;
+        margin: 0 4px;
+    }
+
+    .grid-2-columns {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}
+
+/* Style for error messages */
+.error-message {
+    color: red;
+    font-size: 0.85em;
+    margin-top: 5px;
+    padding-left: 8px;
 }

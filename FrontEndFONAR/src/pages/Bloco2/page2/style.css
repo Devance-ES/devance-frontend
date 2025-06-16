@@ -13,6 +13,7 @@ body {
 .menu-lateral {
     width: 72px;
     background: #8e44ad;
+    /* Roxo mais escuro */
     min-height: 100vh;
     position: fixed;
     left: 0;
@@ -82,6 +83,7 @@ body {
     color: #191919;
 }
 
+/* Etapas (Steps) */
 .etapas-container {
     margin-top: 32px;
     margin-bottom: 32px;
@@ -100,6 +102,7 @@ body {
     flex-direction: column;
     align-items: center;
     min-width: 90px;
+    cursor: default;
 }
 
 .etapa span {
@@ -110,7 +113,6 @@ body {
     height: 36px;
     border-radius: 50%;
     background: #191919;
-    /* Default step circle background */
     color: #fff;
     font-weight: 600;
     font-size: 18px;
@@ -118,16 +120,12 @@ body {
     transition: background 0.2s;
 }
 
+/* Cores para etapas concluídas e ativas - Círculo Roxo Escuro, Número Branco */
+.etapa.completed span,
 .etapa.active span {
     background: #8e44ad;
     color: #fff;
 }
-
-.etapa.completed span {
-    background: #d4aef1;
-    color: #8e44ad;
-}
-
 
 .etapa-titulo {
     font-size: 14px;
@@ -142,13 +140,11 @@ body {
     justify-content: center;
 }
 
-.etapa-titulo.ativo {
+/* Cores para títulos de etapas concluídas e ativas - Roxo Escuro */
+.etapa.completed .etapa-titulo,
+.etapa.active .etapa-titulo {
     color: #8e44ad;
-    font-weight: 600;
-}
-
-.etapa.completed .etapa-titulo {
-    color: #8e44ad;
+    font-weight: 400;
 }
 
 
@@ -156,13 +152,10 @@ body {
     text-decoration: none;
     color: inherit;
     display: flex;
+    cursor: default;
 }
 
-.etapa-link .etapa:hover span,
-.etapa-link .etapa:hover .etapa-titulo {
-    background: #f0e6fa;
-    color: #8e44ad;
-}
+
 
 .linha {
     width: 56px;
@@ -172,8 +165,9 @@ body {
     margin: 0 8px;
 }
 
+/* Cores para linhas concluídas - Roxo Escuro */
 .linha.completed {
-    background: #d4aef1;
+    background: #8e44ad;
 }
 
 /* Form Container */
@@ -202,6 +196,18 @@ form {
     margin-bottom: 0;
 }
 
+.grid-2-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+}
+
+.sub-form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+
 .pergunta {
     font-weight: 600;
     font-size: 18px;
@@ -214,16 +220,10 @@ form {
     align-items: center;
     margin-bottom: 8px;
     font-size: 16px;
-    cursor: pointer;
     padding: 4px 8px;
     border-radius: 4px;
     transition: background 0.2s, color 0.2s;
     color: #333;
-}
-
-.opcoes label:hover {
-    background: #f0e6fa;
-    color: #8e44ad;
 }
 
 .opcoes input[type="radio"],
@@ -233,6 +233,7 @@ form {
     transform: scale(1.1);
 }
 
+/* PAGINAÇÃO */
 .paginacao {
     display: flex;
     justify-content: center;
@@ -241,10 +242,13 @@ form {
     margin-top: 32px;
 }
 
+/* Mantém hover e cursor para botões/links de paginação, pois são interativos */
 .paginacao-btn,
 .paginacao-outro {
     transition: background 0.2s, color 0.2s;
     text-decoration: none;
+    cursor: pointer;
+    /* Mantém o cursor de ponteiro para paginação interativa */
 }
 
 .paginacao-btn:hover,
@@ -252,7 +256,6 @@ form {
     background: #f0e6fa;
     color: #8e44ad;
     border-radius: 6px;
-    cursor: pointer;
 }
 
 .paginacao-btn {
@@ -291,6 +294,7 @@ form {
     border: none;
 }
 
+/* Responsive Adjustments */
 @media (max-width: 900px) {
     .pagina-fonar {
         flex-direction: column;
@@ -345,9 +349,17 @@ form {
         width: 30px;
         margin: 0 4px;
     }
+
+    .grid-2-columns {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
 }
 
-.form-group div[style*="color: red"] {
-    margin-top: 5px;
+/* Style for error messages */
+.error-message {
+    color: red;
     font-size: 0.85em;
+    margin-top: 5px;
+    padding-left: 8px;
 }

@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from 'react'; // Importar useEffect
-import { Link, useNavigate } from 'react-router-dom';
-import './style.css';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import './style.css'; // Make sure to have your CSS file
 
 const MenuLateral = ({ aberto, onToggle }) => (
     <aside className={`menu-lateral${aberto ? ' aberto' : ''}`}>
         <button className="btn-menu" onClick={onToggle}>
             <span className="menu-icone">&#9776;</span>
         </button>
+        {/* You can add actual menu links here later */}
         <nav className="menu-links">
             {aberto && (
                 <>
@@ -34,12 +35,15 @@ const Etapas = () => (
                 <div className="etapa-titulo">Bloco I</div>
             </div>
             <div className="linha completed"></div>
-            <div className="etapa active">
+
+            {/* Bloco II (Step 3) is 'active' for internal logic, and visually completed by CSS */}
+            <div className="etapa active"> {/* Use 'active' for the current major block */}
                 <span>3</span>
                 <div className="etapa-titulo">Bloco II</div>
             </div>
-            <div className="linha"></div>
-            <div className="etapa">
+
+            <div className="linha"></div> {/* This line remains default, leading to future step 4 */}
+            <div className="etapa"> {/* Step 4 (Bloco III) is a future step, default styling */}
                 <span>4</span>
                 <div className="etapa-titulo">Bloco III</div>
             </div>
@@ -57,47 +61,40 @@ const Etapas = () => (
     </div>
 );
 
-function FormularioBloco2Pagina1() {
-    const navigate = useNavigate();
+function FormularioBloco2Pagina3() {
     const [menuAberto, setMenuAberto] = useState(false);
     const [usoDrogasAlcool, setUsoDrogasAlcool] = useState('');
     const [doencaMental, setDoencaMental] = useState('');
     const [descumpriuMedida, setDescumpriuMedida] = useState('');
     const [erros, setErros] = useState({});
-    const [isFormValid, setIsFormValid] = useState(false); // Novo estado para validade do formulário
 
-    // Função de validação que retorna true/false e atualiza 'erros'
-    const validateForm = () => {
-        let currentErros = {};
+    const validarCampos = () => {
         let valid = true;
+        let newErros = {};
 
         if (!usoDrogasAlcool) {
-            currentErros.usoDrogasAlcool = 'Selecione uma opção.';
+            newErros.usoDrogasAlcool = 'Selecione uma opção.';
             valid = false;
         }
         if (!doencaMental) {
-            currentErros.doencaMental = 'Selecione uma opção.';
+            newErros.doencaMental = 'Selecione uma opção.';
             valid = false;
         }
         if (!descumpriuMedida) {
-            currentErros.descumpriuMedida = 'Selecione uma opção.';
+            newErros.descumpriuMedida = 'Selecione uma opção.';
             valid = false;
         }
 
-        setErros(currentErros);
+        setErros(newErros);
         return valid;
     };
 
-    // Efeito para re-validar o formulário sempre que os campos mudam
-    useEffect(() => {
-        setIsFormValid(validateForm());
-    }, [usoDrogasAlcool, doencaMental, descumpriuMedida]); // Dependências: campos do formulário
-
     const handleNextPage = (e) => {
         e.preventDefault();
-        if (validateForm()) { // Chama validateForm() aqui também para exibir erros finais se houver
+        if (validarCampos()) {
             console.log("Formulário Bloco II Página 1 válido!");
-            navigate('/bloco2/page2');
+            // Navigate to the next page, e.g., /bloco2/page2
+            // navigate('/bloco2/page2');
         } else {
             console.log("Por favor, preencha todos os campos obrigatórios.");
         }
@@ -235,12 +232,11 @@ function FormularioBloco2Pagina1() {
                         </div>
 
                         <div className="paginacao">
-                            <Link to="/bloco1/page3" className="paginacao-btn">{'<'}</Link>
-                            <span className="paginacao-atual">1</span>
-                            {/* Desabilita os links se o formulário não for válido */}
-                            <Link to="/bloco2/page2" className={`paginacao-outro ${!isFormValid ? 'disabled-link' : ''}`} onClick={(e) => !isFormValid && e.preventDefault()}>2</Link>
-                            <Link to="/bloco2/page3" className={`paginacao-outro ${!isFormValid ? 'disabled-link' : ''}`} onClick={(e) => !isFormValid && e.preventDefault()}>3</Link>
-                            <button type="submit" className="paginacao-btn" disabled={!isFormValid}>{'>'}</button>
+                            <Link to="/bloco2/page2" className="paginacao-btn">{'<'}</Link>
+                            <Link to="/bloco2/page1" className="paginacao-outro">1</Link>
+                            <Link to="/bloco2/page2" className="paginacao-outro">2</Link>
+                            <span className="paginacao-atual">3</span>
+                            <button type="submit" className="paginacao-btn">{'>'}</button>
                         </div>
                     </form>
                 </div>
@@ -249,4 +245,4 @@ function FormularioBloco2Pagina1() {
     );
 }
 
-export default FormularioBloco2Pagina1;
+export default FormularioBloco2Pagina3;
