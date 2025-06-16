@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import './style.css';
 
 const MenuLateral = ({ aberto, onToggle }) => (
@@ -7,31 +7,39 @@ const MenuLateral = ({ aberto, onToggle }) => (
         <button className="btn-menu" onClick={onToggle}>
             <span className="menu-icone">&#9776;</span>
         </button>
-        <nav className="menu-links"></nav>
+        <nav className="menu-links">
+            {aberto && (
+                <>
+                    <a href="#" className="menu-item">#</a>
+                    <a href="#" className="menu-item">#</a>
+                    <a href="#" className="menu-item">#</a>
+                </>
+            )}
+        </nav>
     </aside>
 );
 
 const Etapas = () => (
     <div className="etapas-container">
         <div className="etapas">
-            <Link to="/bloco1/page1" className="etapa-link">
-                <div className="etapa">
-                    <span>1</span>
+            <div className="etapa completed">
+                <span>1</span>
+                <div>
                     <div className="etapa-titulo">Identificação<br />das partes</div>
                 </div>
-            </Link>
-            <div className="linha"></div>
+            </div>
+            <div className="linha completed"></div>
+
+
             <div className="etapa active">
                 <span>2</span>
-                <div className="etapa-titulo ativo">Bloco I</div>
+                <div className="etapa-titulo">Bloco I</div>
             </div>
             <div className="linha"></div>
-            <Link to="/bloco1/page3" className="etapa-link">
-                <div className="etapa">
-                    <span>3</span>
-                    <div className="etapa-titulo">Bloco II</div>
-                </div>
-            </Link>
+            <div className="etapa">
+                <span>3</span>
+                <div className="etapa-titulo">Bloco II</div>
+            </div>
             <div className="linha"></div>
             <div className="etapa">
                 <span>4</span>
@@ -52,39 +60,61 @@ const Etapas = () => (
 );
 
 const FormularioBloco1Pagina2 = () => {
+    const navigate = useNavigate();
     const [menuAberto, setMenuAberto] = useState(false);
     const [outrasAgressoes, setOutrasAgressoes] = useState([]);
     const [sexoForcado, setSexoForcado] = useState('');
     const [erros, setErros] = useState({});
-
+    const [isFormValid, setIsFormValid] = useState(false);
     const handleOutrasAgressoes = (valor) => {
-        if (outrasAgressoes.includes(valor)) {
-            setOutrasAgressoes(outrasAgressoes.filter((v) => v !== valor));
-        } else {
-            setOutrasAgressoes([...outrasAgressoes, valor]);
-        }
+        setOutrasAgressoes(prev => {
+            if (valor === 'nenhuma') {
+                return ['nenhuma'];
+            }
+            if (prev.includes('nenhuma')) {
+                return prev.filter(item => item !== 'nenhuma');
+            }
+            return prev.includes(valor) ? prev.filter((v) => v !== valor) : [...prev, valor];
+        });
     };
 
     const handleSexoForcado = (valor) => {
-        setSexoForcado(valor === sexoForcado ? '' : valor);
+        setSexoForcado(valor);
     };
 
-    // Validação ao trocar de página (pode ser usada futuramente)
-    const validarCampos = () => {
+    const validateForm = () => {
+        let currentErros = {};
         let valid = true;
-        let newErros = {};
 
         if (outrasAgressoes.length === 0) {
-            newErros.outrasAgressoes = 'Selecione pelo menos uma opção.';
+            currentErros.outrasAgressoes = 'Selecione pelo menos uma opção.';
             valid = false;
-        }
-        if (!sexoForcado) {
-            newErros.sexoForcado = 'Selecione uma opção.';
+        } else if (outrasAgressoes.includes('nenhuma') && outrasAgressoes.length > 1) {
+            currentErros.outrasAgressoes = 'Nenhuma das agressões acima não pode ser selecionado com outras opções.';
             valid = false;
         }
 
-        setErros(newErros);
+        if (!sexoForcado) {
+            currentErros.sexoForcado = 'Selecione uma opção.';
+            valid = false;
+        }
+
+        setErros(currentErros);
         return valid;
+    };
+
+    useEffect(() => {
+        setIsFormValid(validateForm());
+    }, [outrasAgressoes, sexoForcado]);
+
+    const handleNextPage = (e) => {
+        e.preventDefault();
+        if (validateForm()) {
+            console.log("Formulário Bloco 1 Página 2 válido!");
+            navigate('/bloco1/page3');
+        } else {
+            console.log("Por favor, preencha todos os campos obrigatórios.");
+        }
     };
 
     return (
@@ -94,7 +124,7 @@ const FormularioBloco1Pagina2 = () => {
                 <h1 className="titulo-fonar">Formulário FONAR</h1>
                 <Etapas />
                 <div className="form-container">
-                    <form>
+                    <form onSubmit={handleNextPage}>
                         <div className="form-group">
                             <label className="pergunta">
                                 O(A) agressor(a) já praticou alguma(s) destas outras agressões físicas contra você? <span style={{ color: 'red' }}>*</span>
@@ -162,7 +192,7 @@ const FormularioBloco1Pagina2 = () => {
                                 </label>
                             </div>
                             {erros.outrasAgressoes && (
-                                <div style={{ color: 'red', fontSize: 13 }}>{erros.outrasAgressoes}</div>
+                                <div className="error-message">{erros.outrasAgressoes}</div>
                             )}
                         </div>
                         <div className="form-group">
@@ -172,7 +202,7 @@ const FormularioBloco1Pagina2 = () => {
                             <div className="opcoes">
                                 <label>
                                     <input
-                                        type="checkbox"
+                                        type="radio"
                                         name="sexo-forcado"
                                         value="sim"
                                         checked={sexoForcado === 'sim'}
@@ -182,7 +212,7 @@ const FormularioBloco1Pagina2 = () => {
                                 </label>
                                 <label>
                                     <input
-                                        type="checkbox"
+                                        type="radio"
                                         name="sexo-forcado"
                                         value="nao"
                                         checked={sexoForcado === 'nao'}
@@ -192,15 +222,17 @@ const FormularioBloco1Pagina2 = () => {
                                 </label>
                             </div>
                             {erros.sexoForcado && (
-                                <div style={{ color: 'red', fontSize: 13 }}>{erros.sexoForcado}</div>
+                                <div className="error-message">{erros.sexoForcado}</div>
                             )}
                         </div>
                         <div className="paginacao">
                             <Link to="/bloco1/page1" className="paginacao-btn">{'<'}</Link>
-                            <Link to="/bloco1/page1" className="paginacao-outro">1</Link>
+
+
+                            <Link to="/bloco1/page1" className={`paginacao-outro ${!isFormValid ? 'disabled-link' : ''}`} onClick={(e) => !isFormValid && e.preventDefault()}>1</Link>
                             <span className="paginacao-atual">2</span>
-                            <Link to="/bloco1/page3" className="paginacao-outro">3</Link>
-                            <Link to="/bloco1/page3" className="paginacao-btn">{'>'}</Link>
+                            <Link to="/bloco1/page3" className={`paginacao-outro ${!isFormValid ? 'disabled-link' : ''}`} onClick={(e) => !isFormValid && e.preventDefault()}>3</Link>
+                            <button type="submit" className="paginacao-btn" disabled={!isFormValid}>{'>'}</button>
                         </div>
                     </form>
                 </div>

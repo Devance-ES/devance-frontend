@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import './style.css';
 
 const MenuLateral = ({ aberto, onToggle }) => (
@@ -7,31 +7,37 @@ const MenuLateral = ({ aberto, onToggle }) => (
         <button className="btn-menu" onClick={onToggle}>
             <span className="menu-icone">&#9776;</span>
         </button>
-        <nav className="menu-links"></nav>
+        <nav className="menu-links">
+            {aberto && (
+                <>
+                    <a href="#" className="menu-item">#</a>
+                    <a href="#" className="menu-item">#</a>
+                    <a href="#" className="menu-item">#</a>
+                </>
+            )}
+        </nav>
     </aside>
 );
 
 const Etapas = () => (
     <div className="etapas-container">
         <div className="etapas">
-            <div className="etapa">
+            <div className="etapa active">
                 <span>1</span>
                 <div>
                     <div className="etapa-titulo">Identificação<br />das partes</div>
                 </div>
             </div>
             <div className="linha"></div>
-            <div className="etapa active">
+            <div className="etapa">
                 <span>2</span>
-                <div className="etapa-titulo ativo">Bloco I</div>
+                <div className="etapa-titulo">Bloco I</div>
             </div>
             <div className="linha"></div>
-            <Link to="/bloco1/page3" className="etapa-link">
-                <div className="etapa">
-                    <span>3</span>
-                    <div className="etapa-titulo">Bloco II</div>
-                </div>
-            </Link>
+            <div className="etapa">
+                <span>3</span>
+                <div className="etapa-titulo">Bloco II</div>
+            </div>
             <div className="linha"></div>
             <div className="etapa">
                 <span>4</span>
@@ -52,43 +58,73 @@ const Etapas = () => (
 );
 
 function FormularioBloco1Pagina1() {
+    const navigate = useNavigate();
     const [menuAberto, setMenuAberto] = useState(false);
     const [ameaca, setAmeaca] = useState([]);
     const [agressoes, setAgressoes] = useState([]);
     const [erros, setErros] = useState({});
+    const [isFormValid, setIsFormValid] = useState(false);
 
     const handleAmeaca = (valor) => {
-        if (ameaca.includes(valor)) {
-            setAmeaca(ameaca.filter((v) => v !== valor));
-        } else {
-            setAmeaca([...ameaca, valor]);
-        }
+        setAmeaca(prev => {
+            if (valor === 'nao') {
+                return ['nao'];
+            }
+            if (prev.includes('nao')) {
+                return prev.filter(item => item !== 'nao' && item !== valor);
+            }
+            return prev.includes(valor) ? prev.filter((v) => v !== valor) : [...prev, valor];
+        });
     };
 
     const handleAgressoes = (valor) => {
-        if (agressoes.includes(valor)) {
-            setAgressoes(agressoes.filter((v) => v !== valor));
-        } else {
-            setAgressoes([...agressoes, valor]);
-        }
+        setAgressoes(prev => {
+            if (valor === 'nenhuma') {
+                return ['nenhuma'];
+            }
+            if (prev.includes('nenhuma')) {
+                return prev.filter(item => item !== 'nenhuma' && item !== valor);
+            }
+            return prev.includes(valor) ? prev.filter((v) => v !== valor) : [...prev, valor];
+        });
     };
 
-    // Validação ao trocar de página (pode ser usada futuramente)
-    const validarCampos = () => {
+    const validateForm = () => {
+        let currentErros = {};
         let valid = true;
-        let newErros = {};
 
         if (ameaca.length === 0) {
-            newErros.ameaca = 'Selecione pelo menos uma opção.';
+            currentErros.ameaca = 'Selecione pelo menos uma opção.';
             valid = false;
-        }
-        if (agressoes.length === 0) {
-            newErros.agressoes = 'Selecione pelo menos uma opção.';
+        } else if (ameaca.includes('nao') && ameaca.length > 1) {
+            currentErros.ameaca = 'Não pode ser selecionado com outras opções.';
             valid = false;
         }
 
-        setErros(newErros);
+        if (agressoes.length === 0) {
+            currentErros.agressoes = 'Selecione pelo menos uma opção.';
+            valid = false;
+        } else if (agressoes.includes('nenhuma') && agressoes.length > 1) {
+            currentErros.agressoes = 'Nenhuma das agressões acima não pode ser selecionado com outras opções.';
+            valid = false;
+        }
+
+        setErros(currentErros);
         return valid;
+    };
+
+    useEffect(() => {
+        setIsFormValid(validateForm());
+    }, [ameaca, agressoes]);
+
+    const handleNextPage = (e) => {
+        e.preventDefault();
+        if (validateForm()) {
+            console.log("Formulário Bloco 1 Página 1 válido!");
+            navigate('/bloco1/page2');
+        } else {
+            console.log("Por favor, preencha todos os campos obrigatórios.");
+        }
     };
 
     return (
@@ -98,7 +134,7 @@ function FormularioBloco1Pagina1() {
                 <h1 className="titulo-fonar">Formulário FONAR</h1>
                 <Etapas />
                 <div className="form-container">
-                    <form>
+                    <form onSubmit={handleNextPage}>
                         <div className="form-group">
                             <label className="pergunta">
                                 O(A) agressor(a) já ameaçou você ou algum familiar com a finalidade de atingi-la? <span style={{ color: 'red' }}>*</span>
@@ -142,7 +178,7 @@ function FormularioBloco1Pagina1() {
                                 </label>
                             </div>
                             {erros.ameaca && (
-                                <div style={{ color: 'red', fontSize: 13 }}>{erros.ameaca}</div>
+                                <div className="error-message">{erros.ameaca}</div>
                             )}
                         </div>
                         <div className="form-group">
@@ -224,14 +260,16 @@ function FormularioBloco1Pagina1() {
                                 </label>
                             </div>
                             {erros.agressoes && (
-                                <div style={{ color: 'red', fontSize: 13 }}>{erros.agressoes}</div>
+                                <div className="error-message">{erros.agressoes}</div>
                             )}
                         </div>
                         <div className="paginacao">
+                            <Link to="/bloco1/page1" className="paginacao-btn disabled-link" onClick={(e) => e.preventDefault()}>{'<'}</Link>
                             <span className="paginacao-atual">1</span>
-                            <Link to="/bloco1/page2" className="paginacao-outro">2</Link>
-                            <Link to="/bloco1/page3" className="paginacao-outro">3</Link>
-                            <Link to="/bloco1/page2" className="paginacao-btn">{'>'}</Link>
+
+                            <Link to="/bloco1/page2" className={`paginacao-outro ${!isFormValid ? 'disabled-link' : ''}`} onClick={(e) => !isFormValid && e.preventDefault()}>2</Link>
+                            <Link to="/bloco1/page3" className={`paginacao-outro ${!isFormValid ? 'disabled-link' : ''}`} onClick={(e) => !isFormValid && e.preventDefault()}>3</Link>
+                            <button type="submit" className="paginacao-btn" disabled={!isFormValid}>{'>'}</button>
                         </div>
                     </form>
                 </div>

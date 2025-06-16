@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'; // Importar useEffect
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './style.css';
 
@@ -10,9 +10,9 @@ const MenuLateral = ({ aberto, onToggle }) => (
         <nav className="menu-links">
             {aberto && (
                 <>
-                    <a href="#" className="menu-item">Dashboard</a>
-                    <a href="#" className="menu-item">Configurações</a>
-                    <a href="#" className="menu-item">Sair</a>
+                    <a href="#" className="menu-item">#</a>
+                    <a href="#" className="menu-item">#</a>
+                    <a href="#" className="menu-item">#</a>
                 </>
             )}
         </nav>
@@ -64,9 +64,8 @@ function FormularioBloco2Pagina1() {
     const [doencaMental, setDoencaMental] = useState('');
     const [descumpriuMedida, setDescumpriuMedida] = useState('');
     const [erros, setErros] = useState({});
-    const [isFormValid, setIsFormValid] = useState(false); // Novo estado para validade do formulário
+    const [isFormValid, setIsFormValid] = useState(false);
 
-    // Função de validação que retorna true/false e atualiza 'erros'
     const validateForm = () => {
         let currentErros = {};
         let valid = true;

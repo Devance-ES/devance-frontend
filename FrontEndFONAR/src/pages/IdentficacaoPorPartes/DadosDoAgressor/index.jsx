@@ -7,7 +7,15 @@ const MenuLateral = ({ aberto, onToggle }) => (
         <button className="btn-menu" onClick={onToggle}>
             <span className="menu-icone">&#9776;</span>
         </button>
-        <nav className="menu-links"></nav>
+        <nav className="menu-links">
+            {aberto && (
+                <>
+                    <a href="#" className="menu-item">#</a>
+                    <a href="#" className="menu-item">#</a>
+                    <a href="#" className="menu-item">#</a>
+                </>
+            )}
+        </nav>
     </aside>
 );
 

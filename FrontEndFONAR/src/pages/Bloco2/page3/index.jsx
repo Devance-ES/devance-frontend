@@ -1,19 +1,18 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import './style.css'; // Make sure to have your CSS file
+import './style.css';
 
 const MenuLateral = ({ aberto, onToggle }) => (
     <aside className={`menu-lateral${aberto ? ' aberto' : ''}`}>
         <button className="btn-menu" onClick={onToggle}>
             <span className="menu-icone">&#9776;</span>
         </button>
-        {/* You can add actual menu links here later */}
         <nav className="menu-links">
             {aberto && (
                 <>
-                    <a href="#" className="menu-item">Dashboard</a>
-                    <a href="#" className="menu-item">Configurações</a>
-                    <a href="#" className="menu-item">Sair</a>
+                    <a href="#" className="menu-item">#</a>
+                    <a href="#" className="menu-item">#</a>
+                    <a href="#" className="menu-item">#</a>
                 </>
             )}
         </nav>
@@ -36,14 +35,14 @@ const Etapas = () => (
             </div>
             <div className="linha completed"></div>
 
-            {/* Bloco II (Step 3) is 'active' for internal logic, and visually completed by CSS */}
-            <div className="etapa active"> {/* Use 'active' for the current major block */}
+
+            <div className="etapa active">
                 <span>3</span>
                 <div className="etapa-titulo">Bloco II</div>
             </div>
 
-            <div className="linha"></div> {/* This line remains default, leading to future step 4 */}
-            <div className="etapa"> {/* Step 4 (Bloco III) is a future step, default styling */}
+            <div className="linha"></div>
+            <div className="etapa">
                 <span>4</span>
                 <div className="etapa-titulo">Bloco III</div>
             </div>
@@ -93,8 +92,6 @@ function FormularioBloco2Pagina3() {
         e.preventDefault();
         if (validarCampos()) {
             console.log("Formulário Bloco II Página 1 válido!");
-            // Navigate to the next page, e.g., /bloco2/page2
-            // navigate('/bloco2/page2');
         } else {
             console.log("Por favor, preencha todos os campos obrigatórios.");
         }

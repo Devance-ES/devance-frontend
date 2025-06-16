@@ -1,38 +1,51 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import './style.css';
+import React, { useState, useEffect } from 'react'; // Importar useEffect
+import { Link, useNavigate } from 'react-router-dom'; // Importar useNavigate
+import './style.css'; // Make sure to have your CSS file
 
 const MenuLateral = ({ aberto, onToggle }) => (
     <aside className={`menu-lateral${aberto ? ' aberto' : ''}`}>
         <button className="btn-menu" onClick={onToggle}>
             <span className="menu-icone">&#9776;</span>
         </button>
-        <nav className="menu-links"></nav>
+        <nav className="menu-links">
+            {aberto && (
+                <>
+                    <a href="#" className="menu-item">#</a>
+                    <a href="#" className="menu-item">#</a>
+                    <a href="#" className="menu-item">#</a>
+                </>
+            )}
+        </nav>
     </aside>
 );
 
 const Etapas = () => (
     <div className="etapas-container">
         <div className="etapas">
-            <Link to="/bloco1/page1" className="etapa-link">
-                <div className="etapa">
-                    <span>1</span>
+            {/* CORRIGIDO: Etapa 1 (Identificação) é completed */}
+            <div className="etapa completed">
+                <span>1</span>
+                <div>
                     <div className="etapa-titulo">Identificação<br />das partes</div>
                 </div>
-            </Link>
-            <div className="linha"></div>
-            <div className="etapa active">
-                <span>2</span>
-                <div className="etapa-titulo ativo">Bloco I</div>
             </div>
-            <div className="linha"></div>
-            <Link to="/bloco1/page3" className="etapa-link">
-                <div className="etapa">
-                    <span>3</span>
-                    <div className="etapa-titulo">Bloco II</div>
-                </div>
-            </Link>
-            <div className="linha"></div>
+            <div className="linha completed"></div> {/* Linha após a etapa 1 é completed */}
+
+            {/* CORRIGIDO: Etapa 2 (Bloco I) é completed */}
+            <div className="etapa completed">
+                <span>2</span>
+                <div className="etapa-titulo">Bloco I</div>
+            </div>
+            <div className="linha completed"></div> {/* Linha após a etapa 2 é completed */}
+
+            {/* CORRIGIDO: Etapa 3 (Bloco II) é active */}
+            <div className="etapa active">
+                <span>3</span>
+                <div className="etapa-titulo">Bloco II</div>
+            </div>
+            <div className="linha"></div> {/* Linha para a próxima etapa (Bloco III), ainda futura */}
+
+            {/* Etapas futuras (4, 5, 6) permanecem com o estilo padrão (fundo escuro) */}
             <div className="etapa">
                 <span>4</span>
                 <div className="etapa-titulo">Bloco III</div>
@@ -52,50 +65,72 @@ const Etapas = () => (
 );
 
 const FormularioBloco1Pagina3 = () => {
+    const navigate = useNavigate();
     const [menuAberto, setMenuAberto] = useState(false);
 
-    // Controle para permitir apenas uma opção nas duas últimas perguntas
+
     const [ocorrencia, setOcorrencia] = useState('');
     const [ameacasFrequentes, setAmeacasFrequentes] = useState('');
     const [comportamentos, setComportamentos] = useState([]);
     const [erros, setErros] = useState({});
-
+    const [isFormValid, setIsFormValid] = useState(false);
     const handleComportamento = (valor) => {
-        if (comportamentos.includes(valor)) {
-            setComportamentos(comportamentos.filter((v) => v !== valor));
-        } else {
-            setComportamentos([...comportamentos, valor]);
-        }
+        setComportamentos(prev => {
+            if (valor === 'nenhum') {
+                return ['nenhum'];
+            }
+            if (prev.includes('nenhum')) {
+                return prev.filter(item => item !== 'nenhum');
+            }
+            return prev.includes(valor) ? prev.filter((v) => v !== valor) : [...prev, valor];
+        });
     };
 
     const handleOcorrencia = (valor) => {
-        setOcorrencia(valor === ocorrencia ? '' : valor);
+        setOcorrencia(valor);
     };
 
     const handleAmeacasFrequentes = (valor) => {
-        setAmeacasFrequentes(valor === ameacasFrequentes ? '' : valor);
+        setAmeacasFrequentes(valor);
     };
 
-    // Validação ao trocar de página (pode ser usada futuramente)
-    const validarCampos = () => {
+    const validateForm = () => {
+        let currentErros = {};
         let valid = true;
-        let newErros = {};
 
         if (comportamentos.length === 0) {
-            newErros.comportamentos = 'Selecione pelo menos uma opção.';
+            currentErros.comportamentos = 'Selecione pelo menos uma opção.';
+            valid = false;
+        } else if (comportamentos.includes('nenhum') && comportamentos.length > 1) {
+            currentErros.comportamentos = 'Nenhum dos comportamentos acima listados não pode ser selecionado com outras opções.';
             valid = false;
         }
+
         if (!ocorrencia) {
-            newErros.ocorrencia = 'Selecione uma opção.';
+            currentErros.ocorrencia = 'Selecione uma opção.';
             valid = false;
         }
         if (!ameacasFrequentes) {
-            newErros.ameacasFrequentes = 'Selecione uma opção.';
+            currentErros.ameacasFrequentes = 'Selecione uma opção.';
             valid = false;
         }
 
-        setErros(newErros);
+        setErros(currentErros);
         return valid;
+    };
+
+    useEffect(() => {
+        setIsFormValid(validateForm());
+    }, [comportamentos, ocorrencia, ameacasFrequentes]);
+
+    const handleNextPage = (e) => {
+        e.preventDefault();
+        if (validateForm()) {
+            console.log("Formulário Bloco 1 Página 3 válido!");
+            navigate('/bloco2/page1');
+        } else {
+            console.log("Por favor, preencha todos os campos obrigatórios.");
+        }
     };
 
     return (
@@ -105,7 +140,7 @@ const FormularioBloco1Pagina3 = () => {
                 <h1 className="titulo-fonar">Formulário FONAR</h1>
                 <Etapas />
                 <div className="form-container">
-                    <form>
+                    <form onSubmit={handleNextPage}>
                         <div className="form-group">
                             <label className="pergunta">
                                 O(A) agressor(a) já teve algum destes comportamentos? <span style={{ color: 'red' }}>*</span>
@@ -193,7 +228,7 @@ const FormularioBloco1Pagina3 = () => {
                                 </label>
                             </div>
                             {erros.comportamentos && (
-                                <div style={{ color: 'red', fontSize: 13 }}>{erros.comportamentos}</div>
+                                <div className="error-message">{erros.comportamentos}</div>
                             )}
                         </div>
                         <div className="form-group">
@@ -203,7 +238,7 @@ const FormularioBloco1Pagina3 = () => {
                             <div className="opcoes">
                                 <label>
                                     <input
-                                        type="checkbox"
+                                        type="radio"
                                         name="ocorrencia"
                                         value="nao"
                                         checked={ocorrencia === 'nao'}
@@ -212,7 +247,7 @@ const FormularioBloco1Pagina3 = () => {
                                 </label>
                                 <label>
                                     <input
-                                        type="checkbox"
+                                        type="radio"
                                         name="ocorrencia"
                                         value="sim"
                                         checked={ocorrencia === 'sim'}
@@ -221,7 +256,7 @@ const FormularioBloco1Pagina3 = () => {
                                 </label>
                             </div>
                             {erros.ocorrencia && (
-                                <div style={{ color: 'red', fontSize: 13 }}>{erros.ocorrencia}</div>
+                                <div className="error-message">{erros.ocorrencia}</div>
                             )}
                         </div>
                         <div className="form-group">
@@ -231,7 +266,7 @@ const FormularioBloco1Pagina3 = () => {
                             <div className="opcoes">
                                 <label>
                                     <input
-                                        type="checkbox"
+                                        type="radio"
                                         name="ameacas-frequentes"
                                         value="nao"
                                         checked={ameacasFrequentes === 'nao'}
@@ -240,7 +275,7 @@ const FormularioBloco1Pagina3 = () => {
                                 </label>
                                 <label>
                                     <input
-                                        type="checkbox"
+                                        type="radio"
                                         name="ameacas-frequentes"
                                         value="sim"
                                         checked={ameacasFrequentes === 'sim'}
@@ -249,15 +284,17 @@ const FormularioBloco1Pagina3 = () => {
                                 </label>
                             </div>
                             {erros.ameacasFrequentes && (
-                                <div style={{ color: 'red', fontSize: 13 }}>{erros.ameacasFrequentes}</div>
+                                <div className="error-message">{erros.ameacasFrequentes}</div>
                             )}
                         </div>
                         <div className="paginacao">
+
                             <Link to="/bloco1/page2" className="paginacao-btn">{'<'}</Link>
-                            <Link to="/bloco1/page1" className="paginacao-outro">1</Link>
-                            <Link to="/bloco1/page2" className="paginacao-outro">2</Link>
+
+                            <Link to="/bloco1/page1" className={`paginacao-outro ${!isFormValid ? 'disabled-link' : ''}`} onClick={(e) => !isFormValid && e.preventDefault()}>1</Link>
+                            <Link to="/bloco1/page2" className={`paginacao-outro ${!isFormValid ? 'disabled-link' : ''}`} onClick={(e) => !isFormValid && e.preventDefault()}>2</Link>
                             <span className="paginacao-atual">3</span>
-                            <Link to="/bloco2/page1" className="paginacao-btn">{'>'}</Link>
+                            <button type="submit" className="paginacao-btn" disabled={!isFormValid}>{'>'}</button>
                         </div>
                     </form>
                 </div>
