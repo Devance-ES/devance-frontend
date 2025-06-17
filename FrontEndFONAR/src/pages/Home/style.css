@@ -1,0 +1,282 @@
+/* --- Estilos Gerais --- */
+.home-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100%;
+    margin-left: 0;
+    padding: 0;
+    background-color: #fff;
+}
+
+/* --- SEÇÃO DO HEADER MODIFICADA --- */
+.home-header {
+    background-color: #7f3e8f;
+    color: white;
+    padding: 45px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.home-logo-section {
+    display: flex;
+    flex-direction: column;
+    /* Organiza o título e subtítulo verticalmente */
+    align-items: flex-start;
+    /* Alinha à esquerda */
+}
+
+/* Novo estilo para o título principal "FONAR" */
+.fonar-main-title {
+    font-size: 4.5rem;
+    /* Tamanho grande */
+    font-weight: 700;
+    /* Bem forte */
+    margin: 0;
+    line-height: 1;
+    /* Remove espaçamento extra */
+}
+
+/* Novo estilo para o subtítulo */
+.fonar-subtitle {
+    font-size: 1rem;
+    margin: 0;
+    font-weight: 300;
+    /* Fonte mais leve */
+}
+
+.home-nav-buttons {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    /* Espaço entre os botões */
+}
+
+/* Estilo dos botões atualizado */
+.btn-header {
+    background-color: white;
+    /* Fundo branco */
+    color: #6a2c70;
+    /* Texto roxo */
+    border: none;
+    /* Sem borda */
+    padding: 12px 28px;
+    /* Mais padding para um botão maior */
+    border-radius: 25px;
+    /* Bordas bem arredondadas */
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    /* Texto do botão em negrito */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-header:hover {
+    transform: translateY(-2px);
+    /* Efeito de levantar ao passar o mouse */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    /* Sombra suave no hover */
+}
+
+
+/* --- ESTILOS DO CONTEÚDO PRINCIPAL (Mantidos) --- */
+.home-main-content {
+    padding: 60px 40px;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.main-title {
+    font-size: 2.5rem;
+    color: #8e44ad;
+    margin-bottom: 25px;
+    font-weight: 700;
+}
+
+.main-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #555;
+    text-align: justify;
+}
+
+/* --- SEÇÃO DE LOGOS (Mantida) --- */
+.home-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    padding: 40px 20px;
+    background-color: #f8f8f8;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    flex-wrap: wrap;
+}
+
+.partner-logo {
+    height: 60px;
+    object-fit: contain;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+}
+
+.partner-logo:hover {
+    opacity: 1;
+}
+
+/* --- SEÇÃO DE PREVIEW DO FORMULÁRIO (Mantida) --- */
+.form-preview-section {
+    background-color: #f0f2f5;
+    padding: 50px 40px;
+    border-top: 1px solid #eee;
+    text-align: center;
+}
+
+.form-preview-title {
+    font-size: 1.8rem;
+    color: #191919;
+    margin-bottom: 10px;
+}
+
+.form-preview-subtitle {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+.form-preview-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.form-preview-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-preview-field-group {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.form-preview-label {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.form-preview-input {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    color: #555;
+    background-color: #f9f9f9;
+}
+
+/* --- MEDIA QUERIES PARA RESPONSIVIDADE (Ajustadas e Mantidas) --- */
+@media (max-width: 900px) {
+    .home-header {
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .home-logo-section {
+        align-items: center;
+        /* Centraliza o logo/título */
+        text-align: center;
+    }
+
+    .fonar-main-title {
+        font-size: 2.8rem;
+    }
+
+    .fonar-subtitle {
+        font-size: 0.9rem;
+    }
+
+    .home-nav-buttons {
+        width: 100%;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .home-main-content {
+        padding: 40px 20px;
+    }
+
+    .main-title {
+        font-size: 2rem;
+    }
+
+    .main-text {
+        font-size: 1rem;
+    }
+
+    .home-logos {
+        gap: 20px;
+        padding: 30px 15px;
+    }
+
+    .partner-logo {
+        height: 50px;
+    }
+
+    .form-preview-section {
+        padding: 40px 20px;
+    }
+
+    .form-preview-grid {
+        grid-template-columns: 1fr;
+        /* 1 coluna em telas menores */
+        padding: 20px;
+        gap: 20px;
+    }
+}
+
+@media (max-width: 600px) {
+
+    /* O header já se ajusta bem com a regra anterior, mas podemos refinar */
+    .btn-header {
+        padding: 10px 20px;
+        font-size: 0.85rem;
+    }
+
+    .main-title {
+        font-size: 1.8rem;
+    }
+
+    .main-text {
+        font-size: 0.95rem;
+    }
+
+    .partner-logo {
+        height: 40px;
+    }
+
+    .form-preview-title {
+        font-size: 1.5rem;
+    }
+
+    .form-preview-subtitle {
+        font-size: 1rem;
+    }
+}
