@@ -92,7 +92,10 @@ function FormularioBloco3Pagina4() {
     e.preventDefault();
     if (validateForm()) {
       console.log("Formulário Bloco 3 Página 4 válido!");
-      navigate('/bloco4/page1');
+      // ==================================
+      // ROTA DE NAVEGAÇÃO ATUALIZADA AQUI
+      // ==================================
+      navigate('/bloco3/page5');
     } else {
       console.log("Por favor, preencha todos os campos obrigatórios.");
     }
@@ -116,9 +119,6 @@ function FormularioBloco3Pagina4() {
                     <input type="radio" name="filho-deficiencia" value="sim" checked={filhoComDeficiencia === 'sim'} onChange={handleDeficienciaChange} />
                     Sim, quantos?
                   </label>
-                  {/* ================================== */}
-                  {/* CAMPO ATUALIZADO PARA <select>     */}
-                  {/* ================================== */}
                   <select
                     value={quantidadeDeficiencia}
                     onChange={e => setQuantidadeDeficiencia(e.target.value)}
@@ -163,12 +163,16 @@ function FormularioBloco3Pagina4() {
             </div>
 
             {/* --- Navegação Paginada --- */}
+            {/* ================================== */}
+            {/* PAGINAÇÃO ATUALIZADA AQUI        */}
+            {/* ================================== */}
             <div className="paginacao">
               <Link to="/bloco3/page3" className="paginacao-btn">{'<'}</Link>
               <Link to="/bloco3/page1" className="paginacao-outro">1</Link>
               <Link to="/bloco3/page2" className="paginacao-outro">2</Link>
               <Link to="/bloco3/page3" className="paginacao-outro">3</Link>
               <span className="paginacao-atual">4</span>
+              <Link to="/bloco3/page5" className={`paginacao-outro ${!isFormValid ? 'disabled-link' : ''}`} onClick={(e) => !isFormValid && e.preventDefault()}>5</Link>
               <button type="submit" className="paginacao-btn" disabled={!isFormValid}>{'>'}</button>
             </div>
           </form>

@@ -15,6 +15,7 @@ import FormularioBloco3Pagina1 from './pages/Bloco3/page1';
 import FormularioBloco3Pagina2 from './pages/Bloco3/page2';
 import FormularioBloco3Pagina3 from './pages/Bloco3/page3';
 import FormularioBloco3Pagina4 from './pages/Bloco3/page4';
+import FormularioBloco3Pagina5 from './pages/Bloco3/page5';
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
       <Route path="/bloco3/page2" element={<FormularioBloco3Pagina2 />} />
       <Route path="/bloco3/page3" element={<FormularioBloco3Pagina3 />} />
       <Route path="/bloco3/page4" element={<FormularioBloco3Pagina4 />} />
+      <Route path="/bloco3/page5" element={<FormularioBloco3Pagina5 />} />
     </Routes>
   );
 }
