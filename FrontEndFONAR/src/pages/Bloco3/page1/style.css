@@ -5,12 +5,15 @@
 }
 
 .conteudo-principal {
-    margin-left: 72px; /* ou 220px se menu estiver aberto */
+    margin-left: 72px;
+    /* ou 220px se menu estiver aberto */
     padding: 40px;
     flex: 1;
     display: flex;
     flex-direction: column;
-    align-items: center; /* centraliza horizontalmente */
+    align-items: center;
+    /* centraliza horizontalmente */
+    transition: margin-left 0.2s;
 }
 
 
@@ -62,15 +65,6 @@
     pointer-events: auto;
 }
 
-.dados-da-vitima {
-    margin-left: 72px;
-    width: 100%;
-    background: #fff;
-    min-height: 100vh;
-    padding: 0 40px 40px 40px;
-    font-family: 'Inter', Arial, sans-serif;
-    transition: margin-left 0.2s;
-}
 
 .titulo-fonar {
     text-align: center;
@@ -121,6 +115,12 @@
     color: #fff;
 }
 
+.etapa.completed span {
+    background: #8e44ad;
+    /* Mantém a cor roxa para etapas concluídas */
+}
+
+
 .etapa-titulo {
     font-size: 14px;
     color: #191919;
@@ -134,7 +134,7 @@
     justify-content: center;
 }
 
-.etapa-titulo.ativo {
+.etapa.active .etapa-titulo {
     color: #8e44ad;
     font-weight: 600;
 }
@@ -142,13 +142,23 @@
 .linha {
     width: 56px;
     height: 4px;
-    background: #191919;
+    background: #ddd;
+    /* Cor da linha base */
     border-radius: 2px;
-    margin: 0 8px;
+    margin: 0 8px 2.5rem 8px;
+    /* Ajuste para alinhar com os círculos */
+    transition: background-color 0.3s;
 }
+
+.linha.completed {
+    background: #8e44ad;
+    /* Cor da linha para etapas concluídas */
+}
+
 
 .form-container {
     margin-top: 0;
+    width: 100%;
     max-width: 900px;
     margin-left: auto;
     margin-right: auto;
@@ -171,16 +181,20 @@ form {
 .pergunta {
     font-weight: 600;
     font-size: 18px;
-    margin-bottom: 12px;
+    margin-bottom: 16px;
+    /* Aumentado o espaçamento */
     color: #191919;
 }
 
 .opcoes label {
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
     margin-bottom: 8px;
     font-size: 16px;
     cursor: pointer;
-    padding: 4px 8px;
+    padding: 8px;
+    /* Aumentado o padding */
     border-radius: 4px;
     transition: background 0.2s, color 0.2s;
 }
@@ -194,9 +208,69 @@ form {
 .opcoes input[type="checkbox"] {
     margin-right: 8px;
     accent-color: #8e44ad;
+    width: 1.2em;
+    height: 1.2em;
 }
 
-/* PAGINAÇÃO */
+/* ================================== */
+/* NOVOS ESTILOS ADICIONADOS          */
+/* ================================== */
+
+.opcoes-coluna {
+    display: flex;
+    flex-direction: column;
+}
+
+.opcao-com-select {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+}
+
+.opcao-com-select .label-radio {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+
+.opcao-com-select .label-radio input[type="radio"] {
+    margin-right: 8px;
+    accent-color: #8e44ad;
+    width: 1.2em;
+    height: 1.2em;
+}
+
+.opcao-com-select select {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f0f0f0;
+    min-width: 120px;
+    font-family: inherit;
+    font-size: 16px;
+    color: #191919;
+    cursor: pointer;
+}
+
+.opcao-com-select select:disabled {
+    background-color: #e9ecef;
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.error-message {
+    color: #c0392b;
+    /* Vermelho para erros */
+    font-size: 14px;
+    margin-top: 8px;
+}
+
+/* ================================== */
+/* PAGINAÇÃO                          */
+/* ================================== */
 .paginacao {
     display: flex;
     justify-content: center;
@@ -208,6 +282,7 @@ form {
 .paginacao-btn,
 .paginacao-outro {
     transition: background 0.2s, color 0.2s;
+    text-decoration: none;
 }
 
 .paginacao-btn:hover,
@@ -222,7 +297,18 @@ form {
     color: #444;
     font-size: 18px;
     user-select: none;
+    border: none;
+    background: transparent;
+    padding: 4px 8px;
 }
+
+.paginacao-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: transparent;
+    color: #aaa;
+}
+
 
 .paginacao-atual {
     background: #ddd;
@@ -251,6 +337,13 @@ form {
     border: none;
 }
 
+/* Estilo para links de paginação desabilitados */
+.disabled-link {
+    pointer-events: none;
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
 @media (max-width: 900px) {
     .pagina-fonar {
         flex-direction: column;
@@ -268,12 +361,16 @@ form {
         width: 100%;
     }
 
-    .dados-da-vitima {
+    .conteudo-principal {
         margin-left: 0;
-        padding: 0 8px 40px 8px;
+        padding: 0 16px 40px 16px;
     }
 
     .form-container {
         padding: 0 8px;
+    }
+
+    .etapas {
+        transform: scale(0.8);
     }
 }
