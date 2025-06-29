@@ -16,7 +16,9 @@ import FormularioBloco3Pagina2 from './pages/Bloco3/page2';
 import FormularioBloco3Pagina3 from './pages/Bloco3/page3';
 import FormularioBloco3Pagina4 from './pages/Bloco3/page4';
 import FormularioBloco3Pagina5 from './pages/Bloco3/page5';
-
+import FormularioBloco4Pagina1 from './pages/Bloco4/page1';
+import TermoDeEnvioVitima from './pages/TermoDeEnvio/FeitoPelaVitima';
+import PreenchimentoProfissional from './pages/TermoDeEnvio/FeitoPeloProfissional';
 
 function App() {
   return (
@@ -36,6 +38,9 @@ function App() {
       <Route path="/bloco3/page3" element={<FormularioBloco3Pagina3 />} />
       <Route path="/bloco3/page4" element={<FormularioBloco3Pagina4 />} />
       <Route path="/bloco3/page5" element={<FormularioBloco3Pagina5 />} />
+      <Route path="/bloco4/page1" element={<FormularioBloco4Pagina1 />} />
+      <Route path="/termo-de-envio/feito-pela-vitima" element={<TermoDeEnvioVitima />} />
+      <Route path="/termo-de-envio/feito-pelo-profissional" element={<PreenchimentoProfissional />} />
     </Routes>
   );
 }

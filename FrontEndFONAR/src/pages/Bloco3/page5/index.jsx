@@ -46,17 +46,16 @@ function FormularioBloco3Pagina5() {
     const [presenciaramViolencia, setPresenciaramViolencia] = useState('');
     const [violenciaGestacao, setViolenciaGestacao] = useState('');
     const [aumentoAgressao, setAumentoAgressao] = useState('');
+    // --- Novos estados para a pergunta adicionada ---
     const [possuiDeficiencia, setPossuiDeficiencia] = useState('');
     const [especificacaoDeficiencia, setEspecificacaoDeficiencia] = useState('');
-    // --- Novo estado para a pergunta de cor/raça ---
-    const [corRaca, setCorRaca] = useState('');
 
 
     // --- Estados para validação ---
     const [erros, setErros] = useState({});
     const [isFormValid, setIsFormValid] = useState(false);
 
-    // --- Função de validação atualizada ---
+    // --- Função de validação ---
     const validateForm = () => {
         const currentErros = {};
         let valid = true;
@@ -73,6 +72,7 @@ function FormularioBloco3Pagina5() {
             currentErros.aumentoAgressao = 'Selecione uma opção.';
             valid = false;
         }
+        // Validação da nova pergunta
         if (!possuiDeficiencia) {
             currentErros.possuiDeficiencia = 'Selecione uma opção.';
             valid = false;
@@ -80,11 +80,7 @@ function FormularioBloco3Pagina5() {
             currentErros.possuiDeficiencia = 'Por favor, especifique a condição.';
             valid = false;
         }
-        // Validação da nova pergunta
-        if (!corRaca) {
-            currentErros.corRaca = 'Selecione uma opção.';
-            valid = false;
-        }
+
 
         setErros(currentErros);
         return valid;
@@ -94,13 +90,14 @@ function FormularioBloco3Pagina5() {
     useEffect(() => {
         setIsFormValid(validateForm());
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [presenciaramViolencia, violenciaGestacao, aumentoAgressao, possuiDeficiencia, especificacaoDeficiencia, corRaca]);
+    }, [presenciaramViolencia, violenciaGestacao, aumentoAgressao, possuiDeficiencia, especificacaoDeficiencia]);
 
+    // Handler para limpar o campo de especificação
     const handleDeficienciaChange = (e) => {
         const { value } = e.target;
         setPossuiDeficiencia(value);
         if (value === 'nao') {
-            setEspecificacaoDeficiencia('');
+            setEspecificacaoDeficiencia(''); // Limpa a especificação se a resposta for "Não"
         }
     };
 
@@ -108,8 +105,8 @@ function FormularioBloco3Pagina5() {
         e.preventDefault();
         if (validateForm()) {
             console.log("Formulário Bloco 3 Página 5 válido!");
-            // Navega para a próxima página do bloco
-            navigate('/bloco3/page6');
+            // Navega para o próximo bloco
+            navigate('/bloco4/page1');
         } else {
             console.log("Por favor, preencha todos os campos obrigatórios.");
         }
@@ -124,6 +121,7 @@ function FormularioBloco3Pagina5() {
                 <Etapas />
                 <div className="form-container">
                     <form onSubmit={handleNextPage}>
+                        {/* Pergunta 1: Filhos presenciaram violência */}
                         <div className="form-group">
                             <label className="pergunta">Seu(s) filho(s) já presenciaram ato(s) de violência do(a) agressor(a) contra você?</label>
                             <div className="opcoes">
@@ -132,6 +130,8 @@ function FormularioBloco3Pagina5() {
                             </div>
                             {erros.presenciaramViolencia && <div className="error-message">{erros.presenciaramViolencia}</div>}
                         </div>
+
+                        {/* Pergunta 2: Violência na gravidez */}
                         <div className="form-group">
                             <label className="pergunta">Você já sofreu algum tipo de violência durante a gravidez ou nos três meses posteriores ao parto?</label>
                             <div className="opcoes">
@@ -140,6 +140,8 @@ function FormularioBloco3Pagina5() {
                             </div>
                             {erros.violenciaGestacao && <div className="error-message">{erros.violenciaGestacao}</div>}
                         </div>
+
+                        {/* Pergunta 3: Aumento das agressões */}
                         <div className="form-group">
                             <label className="pergunta">Se você está em novo relacionamento, percebeu que as ameaças ou as agressões físicas aumentaram em razão disso?</label>
                             <div className="opcoes">
@@ -148,15 +150,21 @@ function FormularioBloco3Pagina5() {
                             </div>
                             {erros.aumentoAgressao && <div className="error-message">{erros.aumentoAgressao}</div>}
                         </div>
+
+                        {/* ================================================================ */}
+                        {/* NOVA PERGUNTA ADICIONADA AQUI                                    */}
+                        {/* ================================================================ */}
                         <div className="form-group">
                             <label className="pergunta">Você possui alguma deficiência ou é portadora de doenças degenerativas que acarretam condição limitante ou de vulnerabilidade física ou mental?</label>
                             <div className="opcoes">
                                 <label><input type="radio" name="possui-deficiencia" value="sim" checked={possuiDeficiencia === 'sim'} onChange={handleDeficienciaChange} />Sim, qual(is)?</label>
                                 <label><input type="radio" name="possui-deficiencia" value="nao" checked={possuiDeficiencia === 'nao'} onChange={handleDeficienciaChange} />Não</label>
                             </div>
+
+                            {/* Caixa de texto condicional */}
                             {possuiDeficiencia === 'sim' && (
                                 <textarea
-                                    className="textarea-especificacao"
+                                    className="textarea-especificacao" /* Adicione esta classe ao seu CSS se quiser estilo customizado */
                                     value={especificacaoDeficiencia}
                                     onChange={(e) => setEspecificacaoDeficiencia(e.target.value)}
                                     placeholder="Descreva a condição aqui..."
@@ -165,30 +173,6 @@ function FormularioBloco3Pagina5() {
                                 />
                             )}
                             {erros.possuiDeficiencia && <div className="error-message">{erros.possuiDeficiencia}</div>}
-                        </div>
-
-
-                        <div className="form-group">
-                            <label className="pergunta">Com qual cor/raça você se identifica?</label>
-                            <div className="opcoes">
-                                <label>
-                                    <input type="radio" name="cor-raca" value="branca" checked={corRaca === 'branca'} onChange={e => setCorRaca(e.target.value)} />
-                                    Branca
-                                </label>
-                                <label>
-                                    <input type="radio" name="cor-raca" value="preta" checked={corRaca === 'preta'} onChange={e => setCorRaca(e.target.value)} />
-                                    Preta
-                                </label>
-                                <label>
-                                    <input type="radio" name="cor-raca" value="amarela" checked={corRaca === 'amarela'} onChange={e => setCorRaca(e.target.value)} />
-                                    Amarela/oriental
-                                </label>
-                                <label>
-                                    <input type="radio" name="cor-raca" value="indigena" checked={corRaca === 'indigena'} onChange={e => setCorRaca(e.target.value)} />
-                                    Indígena
-                                </label>
-                            </div>
-                            {erros.corRaca && <div className="error-message">{erros.corRaca}</div>}
                         </div>
 
                         {/* --- Navegação Paginada --- */}
