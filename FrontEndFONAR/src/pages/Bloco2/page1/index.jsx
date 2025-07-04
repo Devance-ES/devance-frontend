@@ -2,23 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './style.css';
 
-const MenuLateral = ({ aberto, onToggle }) => (
-    <aside className={`menu-lateral${aberto ? ' aberto' : ''}`}>
-        <button className="btn-menu" onClick={onToggle}>
-            <span className="menu-icone">&#9776;</span>
-        </button>
-        <nav className="menu-links">
-            {aberto && (
-                <>
-                    <a href="#" className="menu-item">#</a>
-                    <a href="#" className="menu-item">#</a>
-                    <a href="#" className="menu-item">#</a>
-                </>
-            )}
-        </nav>
-    </aside>
-);
-
 const Etapas = () => (
     <div className="etapas-container">
         <div className="etapas">
@@ -59,7 +42,7 @@ const Etapas = () => (
 
 function FormularioBloco2Pagina1() {
     const navigate = useNavigate();
-    const [menuAberto, setMenuAberto] = useState(false);
+
     const [usoDrogasAlcool, setUsoDrogasAlcool] = useState('');
     const [doencaMental, setDoencaMental] = useState('');
     const [descumpriuMedida, setDescumpriuMedida] = useState('');
@@ -87,14 +70,13 @@ function FormularioBloco2Pagina1() {
         return valid;
     };
 
-    // Efeito para re-validar o formulário sempre que os campos mudam
     useEffect(() => {
         setIsFormValid(validateForm());
-    }, [usoDrogasAlcool, doencaMental, descumpriuMedida]); // Dependências: campos do formulário
+    }, [usoDrogasAlcool, doencaMental, descumpriuMedida]);
 
     const handleNextPage = (e) => {
         e.preventDefault();
-        if (validateForm()) { // Chama validateForm() aqui também para exibir erros finais se houver
+        if (validateForm()) {
             console.log("Formulário Bloco II Página 1 válido!");
             navigate('/bloco2/page2');
         } else {
@@ -104,7 +86,7 @@ function FormularioBloco2Pagina1() {
 
     return (
         <div className="pagina-fonar">
-            <MenuLateral aberto={menuAberto} onToggle={() => setMenuAberto(!menuAberto)} />
+            {/* MenuLateral removido */}
             <div className="dados-da-vitima">
                 <h1 className="titulo-fonar">Formulário FONAR</h1>
                 <Etapas />
@@ -236,7 +218,6 @@ function FormularioBloco2Pagina1() {
                         <div className="paginacao">
                             <Link to="/bloco1/page3" className="paginacao-btn">{'<'}</Link>
                             <span className="paginacao-atual">1</span>
-                            {/* Desabilita os links se o formulário não for válido */}
                             <Link to="/bloco2/page2" className={`paginacao-outro ${!isFormValid ? 'disabled-link' : ''}`} onClick={(e) => !isFormValid && e.preventDefault()}>2</Link>
                             <Link to="/bloco2/page3" className={`paginacao-outro ${!isFormValid ? 'disabled-link' : ''}`} onClick={(e) => !isFormValid && e.preventDefault()}>3</Link>
                             <button type="submit" className="paginacao-btn" disabled={!isFormValid}>{'>'}</button>
