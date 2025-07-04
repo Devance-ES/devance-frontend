@@ -2,22 +2,7 @@ import React, { useState, useEffect } from 'react'; // Importar useEffect
 import { Link, useNavigate } from 'react-router-dom'; // Importar useNavigate
 import './style.css'; // Make sure to have your CSS file
 
-const MenuLateral = ({ aberto, onToggle }) => (
-    <aside className={`menu-lateral${aberto ? ' aberto' : ''}`}>
-        <button className="btn-menu" onClick={onToggle}>
-            <span className="menu-icone">&#9776;</span>
-        </button>
-        <nav className="menu-links">
-            {aberto && (
-                <>
-                    <a href="#" className="menu-item">#</a>
-                    <a href="#" className="menu-item">#</a>
-                    <a href="#" className="menu-item">#</a>
-                </>
-            )}
-        </nav>
-    </aside>
-);
+
 
 const Etapas = () => (
     <div className="etapas-container">
@@ -66,7 +51,7 @@ const Etapas = () => (
 
 const FormularioBloco1Pagina3 = () => {
     const navigate = useNavigate();
-    const [menuAberto, setMenuAberto] = useState(false);
+    
 
 
     const [ocorrencia, setOcorrencia] = useState('');
@@ -135,7 +120,6 @@ const FormularioBloco1Pagina3 = () => {
 
     return (
         <div className="pagina-fonar">
-            <MenuLateral aberto={menuAberto} onToggle={() => setMenuAberto(!menuAberto)} />
             <div className="dados-da-vitima">
                 <h1 className="titulo-fonar">Formulário FONAR</h1>
                 <Etapas />
