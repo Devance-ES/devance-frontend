@@ -1,65 +1,23 @@
+body {
+    margin: 0;
+    font-family: 'Inter', Arial, sans-serif;
+    background: #f0f2f5;
+}
+
 .pagina-fonar {
     display: flex;
+    flex-direction: column;
     min-height: 100vh;
     background: #fff;
 }
 
-.menu-lateral {
-    width: 72px;
-    background: #8e44ad;
-    min-height: 100vh;
-    position: fixed;
-    left: 0;
-    top: 0;
-    z-index: 10;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    transition: width 0.2s;
-}
-
-.menu-lateral.aberto {
-    width: 220px;
-}
-
-.btn-menu {
-    background: none;
-    border: none;
-    color: #fff;
-    font-size: 2rem;
-    margin: 18px 0 18px 18px;
-    cursor: pointer;
-    outline: none;
-}
-
-.menu-icone {
-    font-size: 2rem;
-}
-
-.menu-links {
-    display: flex;
-    flex-direction: column;
-    margin-top: 40px;
-    width: 100%;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.2s;
-    padding-left: 18px;
-}
-
-.menu-lateral.aberto .menu-links {
-    opacity: 1;
-    pointer-events: auto;
-}
-
 .dados-da-vitima {
-    margin-left: 72px;
+    margin: 0 auto;
     width: 100%;
     background: #fff;
     min-height: 100vh;
     padding: 0 40px 40px 40px;
     font-family: 'Inter', Arial, sans-serif;
-    transition: margin-left 0.2s;
 }
 
 .titulo-fonar {
@@ -82,6 +40,7 @@
     gap: 0;
     margin-bottom: 16px;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 .etapa {
@@ -111,6 +70,11 @@
     color: #fff;
 }
 
+.etapa.completed span {
+    background: #d4aef1;
+    color: #8e44ad;
+}
+
 .etapa-titulo {
     font-size: 14px;
     color: #191919;
@@ -129,6 +93,10 @@
     font-weight: 600;
 }
 
+.etapa.completed .etapa-titulo {
+    color: #8e44ad;
+}
+
 .linha {
     width: 56px;
     height: 4px;
@@ -137,11 +105,20 @@
     margin: 0 8px;
 }
 
+.linha.completed {
+    background: #d4aef1;
+}
+
+/* Form Container */
 .form-container {
     margin-top: 0;
     max-width: 900px;
     margin-left: auto;
     margin-right: auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 form {
@@ -166,13 +143,15 @@ form {
 }
 
 .opcoes label {
-    display: block;
+    display: flex;
+    align-items: center;
     margin-bottom: 8px;
     font-size: 16px;
     cursor: pointer;
     padding: 4px 8px;
     border-radius: 4px;
     transition: background 0.2s, color 0.2s;
+    color: #333;
 }
 
 .opcoes label:hover {
@@ -184,9 +163,9 @@ form {
 .opcoes input[type="checkbox"] {
     margin-right: 8px;
     accent-color: #8e44ad;
+    transform: scale(1.1);
 }
 
-/* PAGINAÇÃO */
 .paginacao {
     display: flex;
     justify-content: center;
@@ -198,6 +177,7 @@ form {
 .paginacao-btn,
 .paginacao-outro {
     transition: background 0.2s, color 0.2s;
+    text-decoration: none;
 }
 
 .paginacao-btn:hover,
@@ -212,6 +192,9 @@ form {
     color: #444;
     font-size: 18px;
     user-select: none;
+    padding: 4px 8px;
+    border: none;
+    background: transparent;
 }
 
 .paginacao-atual {
@@ -242,28 +225,33 @@ form {
 }
 
 @media (max-width: 900px) {
-    .pagina-fonar {
-        flex-direction: column;
-    }
-
-    .menu-lateral {
-        position: relative;
-        width: 100%;
-        min-height: 56px;
-        flex-direction: row;
-        align-items: center;
-    }
-
-    .menu-lateral.aberto {
-        width: 100%;
-    }
-
     .dados-da-vitima {
-        margin-left: 0;
         padding: 0 8px 40px 8px;
     }
 
     .form-container {
         padding: 0 8px;
     }
+
+    .etapas {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px 5px;
+    }
+
+    .etapa {
+        min-width: unset;
+        width: auto;
+        margin-bottom: 5px;
+    }
+
+    .linha {
+        width: 30px;
+        margin: 0 4px;
+    }
+}
+
+.form-group div[style*="color: red"] {
+    margin-top: 5px;
+    font-size: 0.85em;
 }

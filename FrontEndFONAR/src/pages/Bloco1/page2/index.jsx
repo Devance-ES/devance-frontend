@@ -2,23 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './style.css';
 
-const MenuLateral = ({ aberto, onToggle }) => (
-    <aside className={`menu-lateral${aberto ? ' aberto' : ''}`}>
-        <button className="btn-menu" onClick={onToggle}>
-            <span className="menu-icone">&#9776;</span>
-        </button>
-        <nav className="menu-links">
-            {aberto && (
-                <>
-                    <a href="#" className="menu-item">#</a>
-                    <a href="#" className="menu-item">#</a>
-                    <a href="#" className="menu-item">#</a>
-                </>
-            )}
-        </nav>
-    </aside>
-);
-
 const Etapas = () => (
     <div className="etapas-container">
         <div className="etapas">
@@ -29,7 +12,6 @@ const Etapas = () => (
                 </div>
             </div>
             <div className="linha completed"></div>
-
 
             <div className="etapa active">
                 <span>2</span>
@@ -61,11 +43,11 @@ const Etapas = () => (
 
 const FormularioBloco1Pagina2 = () => {
     const navigate = useNavigate();
-    const [menuAberto, setMenuAberto] = useState(false);
     const [outrasAgressoes, setOutrasAgressoes] = useState([]);
     const [sexoForcado, setSexoForcado] = useState('');
     const [erros, setErros] = useState({});
     const [isFormValid, setIsFormValid] = useState(false);
+
     const handleOutrasAgressoes = (valor) => {
         setOutrasAgressoes(prev => {
             if (valor === 'nenhuma') {
@@ -119,7 +101,6 @@ const FormularioBloco1Pagina2 = () => {
 
     return (
         <div className="pagina-fonar">
-            <MenuLateral aberto={menuAberto} onToggle={() => setMenuAberto(!menuAberto)} />
             <div className="dados-da-vitima">
                 <h1 className="titulo-fonar">Formulário FONAR</h1>
                 <Etapas />
@@ -227,8 +208,6 @@ const FormularioBloco1Pagina2 = () => {
                         </div>
                         <div className="paginacao">
                             <Link to="/bloco1/page1" className="paginacao-btn">{'<'}</Link>
-
-
                             <Link to="/bloco1/page1" className={`paginacao-outro ${!isFormValid ? 'disabled-link' : ''}`} onClick={(e) => !isFormValid && e.preventDefault()}>1</Link>
                             <span className="paginacao-atual">2</span>
                             <Link to="/bloco1/page3" className={`paginacao-outro ${!isFormValid ? 'disabled-link' : ''}`} onClick={(e) => !isFormValid && e.preventDefault()}>3</Link>
