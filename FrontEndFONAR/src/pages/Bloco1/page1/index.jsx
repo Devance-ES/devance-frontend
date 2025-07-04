@@ -2,23 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './style.css';
 
-const MenuLateral = ({ aberto, onToggle }) => (
-    <aside className={`menu-lateral${aberto ? ' aberto' : ''}`}>
-        <button className="btn-menu" onClick={onToggle}>
-            <span className="menu-icone">&#9776;</span>
-        </button>
-        <nav className="menu-links">
-            {aberto && (
-                <>
-                    <a href="#" className="menu-item">#</a>
-                    <a href="#" className="menu-item">#</a>
-                    <a href="#" className="menu-item">#</a>
-                </>
-            )}
-        </nav>
-    </aside>
-);
-
 const Etapas = () => (
     <div className="etapas-container">
         <div className="etapas">
@@ -59,7 +42,6 @@ const Etapas = () => (
 
 function FormularioBloco1Pagina1() {
     const navigate = useNavigate();
-    const [menuAberto, setMenuAberto] = useState(false);
     const [ameaca, setAmeaca] = useState([]);
     const [agressoes, setAgressoes] = useState([]);
     const [erros, setErros] = useState({});
@@ -67,25 +49,17 @@ function FormularioBloco1Pagina1() {
 
     const handleAmeaca = (valor) => {
         setAmeaca(prev => {
-            if (valor === 'nao') {
-                return ['nao'];
-            }
-            if (prev.includes('nao')) {
-                return prev.filter(item => item !== 'nao' && item !== valor);
-            }
-            return prev.includes(valor) ? prev.filter((v) => v !== valor) : [...prev, valor];
+            if (valor === 'nao') return ['nao'];
+            if (prev.includes('nao')) return prev.filter(item => item !== 'nao' && item !== valor);
+            return prev.includes(valor) ? prev.filter(v => v !== valor) : [...prev, valor];
         });
     };
 
     const handleAgressoes = (valor) => {
         setAgressoes(prev => {
-            if (valor === 'nenhuma') {
-                return ['nenhuma'];
-            }
-            if (prev.includes('nenhuma')) {
-                return prev.filter(item => item !== 'nenhuma' && item !== valor);
-            }
-            return prev.includes(valor) ? prev.filter((v) => v !== valor) : [...prev, valor];
+            if (valor === 'nenhuma') return ['nenhuma'];
+            if (prev.includes('nenhuma')) return prev.filter(item => item !== 'nenhuma' && item !== valor);
+            return prev.includes(valor) ? prev.filter(v => v !== valor) : [...prev, valor];
         });
     };
 
@@ -129,7 +103,6 @@ function FormularioBloco1Pagina1() {
 
     return (
         <div className="pagina-fonar">
-            <MenuLateral aberto={menuAberto} onToggle={() => setMenuAberto(!menuAberto)} />
             <div className="dados-da-vitima">
                 <h1 className="titulo-fonar">Formulário FONAR</h1>
                 <Etapas />
@@ -181,92 +154,36 @@ function FormularioBloco1Pagina1() {
                                 <div className="error-message">{erros.ameaca}</div>
                             )}
                         </div>
+
                         <div className="form-group">
                             <label className="pergunta">
                                 O(A) agressor(a) já praticou alguma(s) destas agressões físicas contra você? <span style={{ color: 'red' }}>*</span>
                             </label>
                             <div className="opcoes">
-                                <label>
-                                    <input
-                                        type="checkbox"
-                                        name="agressoes"
-                                        value="queimadura"
-                                        checked={agressoes.includes('queimadura')}
-                                        onChange={() => handleAgressoes('queimadura')}
-                                    /> Queimadura
-                                </label>
-                                <label>
-                                    <input
-                                        type="checkbox"
-                                        name="agressoes"
-                                        value="enforcamento"
-                                        checked={agressoes.includes('enforcamento')}
-                                        onChange={() => handleAgressoes('enforcamento')}
-                                    /> Enforcamento
-                                </label>
-                                <label>
-                                    <input
-                                        type="checkbox"
-                                        name="agressoes"
-                                        value="sufocamento"
-                                        checked={agressoes.includes('sufocamento')}
-                                        onChange={() => handleAgressoes('sufocamento')}
-                                    /> Sufocamento
-                                </label>
-                                <label>
-                                    <input
-                                        type="checkbox"
-                                        name="agressoes"
-                                        value="tiro"
-                                        checked={agressoes.includes('tiro')}
-                                        onChange={() => handleAgressoes('tiro')}
-                                    /> Tiro
-                                </label>
-                                <label>
-                                    <input
-                                        type="checkbox"
-                                        name="agressoes"
-                                        value="afogamento"
-                                        checked={agressoes.includes('afogamento')}
-                                        onChange={() => handleAgressoes('afogamento')}
-                                    /> Afogamento
-                                </label>
-                                <label>
-                                    <input
-                                        type="checkbox"
-                                        name="agressoes"
-                                        value="facada"
-                                        checked={agressoes.includes('facada')}
-                                        onChange={() => handleAgressoes('facada')}
-                                    /> Facada
-                                </label>
-                                <label>
-                                    <input
-                                        type="checkbox"
-                                        name="agressoes"
-                                        value="paulada"
-                                        checked={agressoes.includes('paulada')}
-                                        onChange={() => handleAgressoes('paulada')}
-                                    /> Paulada
-                                </label>
-                                <label>
-                                    <input
-                                        type="checkbox"
-                                        name="agressoes"
-                                        value="nenhuma"
-                                        checked={agressoes.includes('nenhuma')}
-                                        onChange={() => handleAgressoes('nenhuma')}
-                                    /> Nenhuma das agressões acima
-                                </label>
+                                {[
+                                    'queimadura', 'enforcamento', 'sufocamento',
+                                    'tiro', 'afogamento', 'facada', 'paulada', 'nenhuma'
+                                ].map((tipo) => (
+                                    <label key={tipo}>
+                                        <input
+                                            type="checkbox"
+                                            name="agressoes"
+                                            value={tipo}
+                                            checked={agressoes.includes(tipo)}
+                                            onChange={() => handleAgressoes(tipo)}
+                                        />
+                                        {tipo === 'nenhuma' ? 'Nenhuma das agressões acima' : tipo.charAt(0).toUpperCase() + tipo.slice(1)}
+                                    </label>
+                                ))}
                             </div>
                             {erros.agressoes && (
                                 <div className="error-message">{erros.agressoes}</div>
                             )}
                         </div>
+
                         <div className="paginacao">
                             <Link to="/bloco1/page1" className="paginacao-btn disabled-link" onClick={(e) => e.preventDefault()}>{'<'}</Link>
                             <span className="paginacao-atual">1</span>
-
                             <Link to="/bloco1/page2" className={`paginacao-outro ${!isFormValid ? 'disabled-link' : ''}`} onClick={(e) => !isFormValid && e.preventDefault()}>2</Link>
                             <Link to="/bloco1/page3" className={`paginacao-outro ${!isFormValid ? 'disabled-link' : ''}`} onClick={(e) => !isFormValid && e.preventDefault()}>3</Link>
                             <button type="submit" className="paginacao-btn" disabled={!isFormValid}>{'>'}</button>
