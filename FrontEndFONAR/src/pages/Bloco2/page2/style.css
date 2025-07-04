@@ -10,10 +10,10 @@ body {
     background: #fff;
 }
 
+/* MENU LATERAL */
 .menu-lateral {
     width: 72px;
-    background: #8e44ad;
-    /* Roxo mais escuro */
+    background: #8e44ad; /* Roxo mais escuro */
     min-height: 100vh;
     position: fixed;
     left: 0;
@@ -22,7 +22,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    transition: width 0.2s;
+    transition: width 0.2s ease;
 }
 
 .menu-lateral.aberto {
@@ -50,7 +50,7 @@ body {
     width: 100%;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.2s;
+    transition: opacity 0.2s ease;
     padding-left: 18px;
 }
 
@@ -59,6 +59,7 @@ body {
     pointer-events: auto;
 }
 
+/* CONTEÚDO PRINCIPAL */
 .dados-da-vitima {
     margin-left: 72px;
     width: 100%;
@@ -66,14 +67,14 @@ body {
     min-height: 100vh;
     padding: 0 40px 40px 40px;
     font-family: 'Inter', Arial, sans-serif;
-    transition: margin-left 0.2s;
+    transition: margin-left 0.2s ease;
 }
 
-.menu-lateral.aberto+.dados-da-vitima {
+.menu-lateral.aberto + .dados-da-vitima {
     margin-left: 220px;
 }
 
-
+/* TÍTULO */
 .titulo-fonar {
     text-align: center;
     font-size: 2rem;
@@ -83,7 +84,7 @@ body {
     color: #191919;
 }
 
-/* Etapas (Steps) */
+/* ETAPAS */
 .etapas-container {
     margin-top: 32px;
     margin-bottom: 32px;
@@ -117,10 +118,10 @@ body {
     font-weight: 600;
     font-size: 18px;
     margin-bottom: 4px;
-    transition: background 0.2s;
+    transition: background 0.2s ease;
 }
 
-/* Cores para etapas concluídas e ativas - Círculo Roxo Escuro, Número Branco */
+/* Cores para etapas concluídas e ativas */
 .etapa.completed span,
 .etapa.active span {
     background: #8e44ad;
@@ -133,29 +134,19 @@ body {
     text-align: center;
     font-weight: 400;
     margin-top: 2px;
-    transition: color 0.2s;
+    transition: color 0.2s ease;
     min-height: 32px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-/* Cores para títulos de etapas concluídas e ativas - Roxo Escuro */
+/* Cores para títulos de etapas concluídas e ativas */
 .etapa.completed .etapa-titulo,
 .etapa.active .etapa-titulo {
     color: #8e44ad;
     font-weight: 400;
 }
-
-
-.etapa-link {
-    text-decoration: none;
-    color: inherit;
-    display: flex;
-    cursor: default;
-}
-
-
 
 .linha {
     width: 56px;
@@ -165,12 +156,12 @@ body {
     margin: 0 8px;
 }
 
-/* Cores para linhas concluídas - Roxo Escuro */
+/* Linhas concluídas */
 .linha.completed {
     background: #8e44ad;
 }
 
-/* Form Container */
+/* FORMULÁRIO */
 .form-container {
     margin-top: 0;
     max-width: 900px;
@@ -207,7 +198,6 @@ form {
     flex-direction: column;
 }
 
-
 .pergunta {
     font-weight: 600;
     font-size: 18px;
@@ -215,6 +205,7 @@ form {
     color: #191919;
 }
 
+/* Estilização das opções */
 .opcoes label {
     display: flex;
     align-items: center;
@@ -222,8 +213,14 @@ form {
     font-size: 16px;
     padding: 4px 8px;
     border-radius: 4px;
-    transition: background 0.2s, color 0.2s;
+    transition: background 0.2s ease, color 0.2s ease;
     color: #333;
+    cursor: pointer;
+}
+
+.opcoes label:hover {
+    background: #f0e6fa;
+    color: #8e44ad;
 }
 
 .opcoes input[type="radio"],
@@ -231,6 +228,7 @@ form {
     margin-right: 8px;
     accent-color: #8e44ad;
     transform: scale(1.1);
+    cursor: pointer;
 }
 
 /* PAGINAÇÃO */
@@ -242,27 +240,26 @@ form {
     margin-top: 32px;
 }
 
-/* Mantém hover e cursor para botões/links de paginação, pois são interativos */
 .paginacao-btn,
 .paginacao-outro {
-    transition: background 0.2s, color 0.2s;
+    transition: background 0.2s ease, color 0.2s ease;
     text-decoration: none;
     cursor: pointer;
-    /* Mantém o cursor de ponteiro para paginação interativa */
+    user-select: none;
+    border-radius: 6px;
+    padding: 4px 8px;
+    font-weight: 400;
 }
 
 .paginacao-btn:hover,
 .paginacao-outro:hover {
     background: #f0e6fa;
     color: #8e44ad;
-    border-radius: 6px;
 }
 
 .paginacao-btn {
     color: #444;
     font-size: 18px;
-    user-select: none;
-    padding: 4px 8px;
     border: none;
     background: transparent;
 }
@@ -288,13 +285,26 @@ form {
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 6px;
-    font-weight: 400;
     background: transparent;
     border: none;
 }
 
-/* Responsive Adjustments */
+/* Link desabilitado */
+.disabled-link {
+    pointer-events: none;
+    opacity: 0.5;
+    cursor: default;
+}
+
+/* MENSAGEM DE ERRO */
+.error-message {
+    color: red;
+    font-size: 0.85em;
+    margin-top: 5px;
+    padding-left: 8px;
+}
+
+/* RESPONSIVO */
 @media (max-width: 900px) {
     .pagina-fonar {
         flex-direction: column;
@@ -322,6 +332,7 @@ form {
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         padding: 10px 18px;
         box-sizing: border-box;
+        z-index: 20;
     }
 
     .dados-da-vitima {
@@ -354,12 +365,4 @@ form {
         grid-template-columns: 1fr;
         gap: 20px;
     }
-}
-
-/* Style for error messages */
-.error-message {
-    color: red;
-    font-size: 0.85em;
-    margin-top: 5px;
-    padding-left: 8px;
 }
