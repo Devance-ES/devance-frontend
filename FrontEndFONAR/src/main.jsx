@@ -45,6 +45,7 @@ function App() {
   );
 }
 
+//teste
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
