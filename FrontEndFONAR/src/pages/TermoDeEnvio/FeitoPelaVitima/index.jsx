@@ -2,23 +2,6 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './style.css';
 
-const MenuLateral = ({ aberto, onToggle }) => (
-    <aside className={`menu-lateral${aberto ? ' aberto' : ''}`}>
-        <button className="btn-menu" onClick={onToggle}>
-            <span className="menu-icone">&#9776;</span>
-        </button>
-        <nav className="menu-links">
-            {aberto && (
-                <>
-                    <a href="#!" className="menu-item">#</a>
-                    <a href="#!" className="menu-item">#</a>
-                    <a href="#!" className="menu-item">#</a>
-                </>
-            )}
-        </nav>
-    </aside>
-);
-
 // Barra de etapas atualizada para a etapa final
 const Etapas = () => (
     <div className="etapas-container">
@@ -59,10 +42,8 @@ const botaoEnviarDesabilitadoStyle = {
     opacity: 0.7
 };
 
-
 function TermoDeEnvioVitima() {
     const navigate = useNavigate();
-    const [menuAberto, setMenuAberto] = useState(false);
     const [concordouTermos, setConcordouTermos] = useState(false);
 
     const handleEnviarFormulario = (e) => {
@@ -77,14 +58,19 @@ function TermoDeEnvioVitima() {
 
     return (
         <div className="pagina-fonar">
-            <MenuLateral aberto={menuAberto} onToggle={() => setMenuAberto(!menuAberto)} />
+            {/* MenuLateral removido completamente */}
 
-            <div className="conteudo-principal" style={{ marginLeft: menuAberto ? '220px' : '72px' }}>
+            <div className="conteudo-principal">
                 <Etapas />
                 <div className="form-container" style={{ textAlign: 'center' }}>
-                    <h1 className="titulo-fonar" style={{ fontSize: '24px', marginBottom: '20px' }}>Termo de Segurança e Privacidade dos Dados</h1>
+                    <h1 className="titulo-fonar" style={{ fontSize: '24px', marginBottom: '20px' }}>
+                        Termo de Segurança e Privacidade dos Dados
+                    </h1>
+
                     <p style={{ maxWidth: '800px', margin: '0 auto', lineHeight: '1.6', color: '#333' }}>
-                        Concordo com a análise dos dados pessoais solicitados, de acordo com os artigos 7º e 11º da Lei nº 13.709/2018 (LGPD). Ficando esta responsável em adotar as medidas aptas para proteger os dados de toda documentação enviada. Declaro, para fins de direito, que as informações supra são verídicas e foram prestadas por mim.
+                        Concordo com a análise dos dados pessoais solicitados, de acordo com os artigos 7º e 11º da Lei nº 13.709/2018 (LGPD).
+                        Ficando esta responsável em adotar as medidas aptas para proteger os dados de toda documentação enviada.
+                        Declaro, para fins de direito, que as informações supra são verídicas e foram prestadas por mim.
                     </p>
 
                     <form onSubmit={handleEnviarFormulario} style={{ marginTop: '40px' }}>
