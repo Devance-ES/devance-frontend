@@ -2,23 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './style.css';
 
-const MenuLateral = ({ aberto, onToggle }) => (
-    <aside className={`menu-lateral${aberto ? ' aberto' : ''}`}>
-        <button className="btn-menu" onClick={onToggle}>
-            <span className="menu-icone">&#9776;</span>
-        </button>
-        <nav className="menu-links">
-            {aberto && (
-                <>
-                    <a href="#!" className="menu-item">#</a>
-                    <a href="#!" className="menu-item">#</a>
-                    <a href="#!" className="menu-item">#</a>
-                </>
-            )}
-        </nav>
-    </aside>
-);
-
 // Barra de etapas atualizada para o Bloco IV
 const Etapas = () => (
     <div className="etapas-container">
@@ -38,10 +21,8 @@ const Etapas = () => (
     </div>
 );
 
-
 function FormularioBloco4Pagina1() {
     const navigate = useNavigate();
-    const [menuAberto, setMenuAberto] = useState(false);
 
     // --- Estados para os campos do formulário ---
     const [moraEmRisco, setMoraEmRisco] = useState('');
@@ -74,18 +55,16 @@ function FormularioBloco4Pagina1() {
         return valid;
     };
 
-    // --- Efeito para re-validar o formulário a cada mudança ---
+    // --- Revalida o formulário sempre que os campos mudam ---
     useEffect(() => {
         setIsFormValid(validateForm());
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [moraEmRisco, dependenteFinanceiramente, aceitaAbrigamento]);
 
-
     const handleNextPage = (e) => {
         e.preventDefault();
         if (validateForm()) {
             console.log("Formulário Bloco 4 Página 1 válido!");
-            // Navega para a página final do Termo de Envio
             navigate('/termo-de-envio');
         } else {
             console.log("Por favor, preencha todos os campos obrigatórios.");
@@ -94,44 +73,65 @@ function FormularioBloco4Pagina1() {
 
     return (
         <div className="pagina-fonar">
-            <MenuLateral aberto={menuAberto} onToggle={() => setMenuAberto(!menuAberto)} />
+            {/* Menu lateral REMOVIDO */}
 
-            <div className="conteudo-principal" style={{ marginLeft: menuAberto ? '220px' : '72px' }}>
+            <div className="conteudo-principal">
                 <h1 className="titulo-fonar">Formulário FONAR</h1>
                 <Etapas />
                 <div className="form-container">
                     <form onSubmit={handleNextPage}>
                         <div className="form-group">
-                            <label className="pergunta">Você considera que mora em bairro, comunidade, área rural ou local de risco de violência?</label>
+                            <label className="pergunta">
+                                Você considera que mora em bairro, comunidade, área rural ou local de risco de violência?
+                            </label>
                             <div className="opcoes">
-                                <label><input type="radio" name="mora-risco" value="sim" checked={moraEmRisco === 'sim'} onChange={e => setMoraEmRisco(e.target.value)} /> Sim</label>
-                                <label><input type="radio" name="mora-risco" value="nao" checked={moraEmRisco === 'nao'} onChange={e => setMoraEmRisco(e.target.value)} /> Não</label>
-                                <label><input type="radio" name="mora-risco" value="nao-sei" checked={moraEmRisco === 'nao-sei'} onChange={e => setMoraEmRisco(e.target.value)} /> Não sei</label>
+                                <label>
+                                    <input type="radio" name="mora-risco" value="sim" checked={moraEmRisco === 'sim'} onChange={e => setMoraEmRisco(e.target.value)} />
+                                    Sim
+                                </label>
+                                <label>
+                                    <input type="radio" name="mora-risco" value="nao" checked={moraEmRisco === 'nao'} onChange={e => setMoraEmRisco(e.target.value)} />
+                                    Não
+                                </label>
+                                <label>
+                                    <input type="radio" name="mora-risco" value="nao-sei" checked={moraEmRisco === 'nao-sei'} onChange={e => setMoraEmRisco(e.target.value)} />
+                                    Não sei
+                                </label>
                             </div>
                             {erros.moraEmRisco && <div className="error-message">{erros.moraEmRisco}</div>}
                         </div>
 
-
                         <div className="form-group">
                             <label className="pergunta">Você se considera dependente financeiramente do(a) agressor(a)?</label>
                             <div className="opcoes">
-                                <label><input type="radio" name="dependente" value="sim" checked={dependenteFinanceiramente === 'sim'} onChange={e => setDependenteFinanceiramente(e.target.value)} /> Sim</label>
-                                <label><input type="radio" name="dependente" value="nao" checked={dependenteFinanceiramente === 'nao'} onChange={e => setDependenteFinanceiramente(e.target.value)} /> Não</label>
+                                <label>
+                                    <input type="radio" name="dependente" value="sim" checked={dependenteFinanceiramente === 'sim'} onChange={e => setDependenteFinanceiramente(e.target.value)} />
+                                    Sim
+                                </label>
+                                <label>
+                                    <input type="radio" name="dependente" value="nao" checked={dependenteFinanceiramente === 'nao'} onChange={e => setDependenteFinanceiramente(e.target.value)} />
+                                    Não
+                                </label>
                             </div>
                             {erros.dependenteFinanceiramente && <div className="error-message">{erros.dependenteFinanceiramente}</div>}
                         </div>
 
-
                         <div className="form-group">
                             <label className="pergunta">Você quer e aceita abrigamento temporário?</label>
                             <div className="opcoes">
-                                <label><input type="radio" name="abrigamento" value="sim" checked={aceitaAbrigamento === 'sim'} onChange={e => setAceitaAbrigamento(e.target.value)} /> Sim</label>
-                                <label><input type="radio" name="abrigamento" value="nao" checked={aceitaAbrigamento === 'nao'} onChange={e => setAceitaAbrigamento(e.target.value)} /> Não</label>
+                                <label>
+                                    <input type="radio" name="abrigamento" value="sim" checked={aceitaAbrigamento === 'sim'} onChange={e => setAceitaAbrigamento(e.target.value)} />
+                                    Sim
+                                </label>
+                                <label>
+                                    <input type="radio" name="abrigamento" value="nao" checked={aceitaAbrigamento === 'nao'} onChange={e => setAceitaAbrigamento(e.target.value)} />
+                                    Não
+                                </label>
                             </div>
                             {erros.aceitaAbrigamento && <div className="error-message">{erros.aceitaAbrigamento}</div>}
                         </div>
 
-                        {/* --- Navegação Paginada --- */}
+                        {/* Navegação Paginada */}
                         <div className="paginacao">
                             <Link to="/bloco3/page5" className="paginacao-btn">{'<'}</Link>
                             <span className="paginacao-atual">1</span>
