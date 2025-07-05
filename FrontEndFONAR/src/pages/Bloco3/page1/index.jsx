@@ -1,26 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import './style.css'; // Certifique-se que seu CSS suporta o layout
+import './style.css';
 
-// O componente MenuLateral permanece o mesmo
-const MenuLateral = ({ aberto, onToggle }) => (
-    <aside className={`menu-lateral${aberto ? ' aberto' : ''}`}>
-        <button className="btn-menu" onClick={onToggle}>
-            <span className="menu-icone">&#9776;</span>
-        </button>
-        <nav className="menu-links">
-            {aberto && (
-                <>
-                    <a href="#!" className="menu-item">#</a>
-                    <a href="#!" className="menu-item">#</a>
-                    <a href="#!" className="menu-item">#</a>
-                </>
-            )}
-        </nav>
-    </aside>
-);
-
-// O componente Etapas permanece o mesmo
 const Etapas = () => (
     <div className="etapas-container">
         <div className="etapas">
@@ -39,24 +20,18 @@ const Etapas = () => (
     </div>
 );
 
-
 function FormularioBloco3Pagina1() {
     const navigate = useNavigate();
-    const [menuAberto, setMenuAberto] = useState(false);
 
-    // --- Estados para os campos do formulário ---
     const [separacao, setSeparacao] = useState('');
     const [temFilhos, setTemFilhos] = useState('');
     const [numFilhosAgressor, setNumFilhosAgressor] = useState('');
     const [numFilhosOutro, setNumFilhosOutro] = useState('');
     const [idadeFilhos, setIdadeFilhos] = useState([]);
     const [filhoComDeficiencia, setFilhoComDeficiencia] = useState('');
-
-    // --- Estados para validação ---
     const [erros, setErros] = useState({});
     const [isFormValid, setIsFormValid] = useState(false);
 
-    // --- Função de validação atualizada ---
     const validateForm = () => {
         const currentErros = {};
         let valid = true;
@@ -70,7 +45,6 @@ function FormularioBloco3Pagina1() {
             currentErros.temFilhos = 'Selecione uma opção.';
             valid = false;
         } else {
-            // Valida se a quantidade foi selecionada quando "Sim" está marcado
             if (temFilhos === 'sim_com_agressor' && !numFilhosAgressor) {
                 currentErros.temFilhos = 'Por favor, selecione a quantidade de filhos.';
                 valid = false;
@@ -80,7 +54,6 @@ function FormularioBloco3Pagina1() {
                 valid = false;
             }
 
-            // Se tem filhos, as perguntas seguintes são obrigatórias
             if (temFilhos.startsWith('sim')) {
                 if (idadeFilhos.length === 0) {
                     currentErros.idadeFilhos = 'Selecione ao menos uma faixa etária.';
@@ -97,13 +70,11 @@ function FormularioBloco3Pagina1() {
         return valid;
     };
 
-    // --- Efeito para re-validar o formulário a cada mudança ---
     useEffect(() => {
         setIsFormValid(validateForm());
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [separacao, temFilhos, numFilhosAgressor, numFilhosOutro, idadeFilhos, filhoComDeficiencia]);
 
-    // Handler para os radio buttons de "temFilhos" para limpar os selects
     const handleTemFilhosChange = (e) => {
         const { value } = e.target;
         setTemFilhos(value);
@@ -140,9 +111,7 @@ function FormularioBloco3Pagina1() {
 
     return (
         <div className="pagina-fonar">
-            <MenuLateral aberto={menuAberto} onToggle={() => setMenuAberto(!menuAberto)} />
-
-            <div className="conteudo-principal" style={{ marginLeft: menuAberto ? '220px' : '72px' }}>
+            <div className="conteudo-principal">
                 <h1 className="titulo-fonar">Formulário FONAR</h1>
                 <Etapas />
 
@@ -156,7 +125,6 @@ function FormularioBloco3Pagina1() {
                             </div>
                             {erros.separacao && <div className="error-message">{erros.separacao}</div>}
                         </div>
-
 
                         <div className="form-group">
                             <label className='pergunta'>Você tem filhos?</label>
@@ -199,7 +167,6 @@ function FormularioBloco3Pagina1() {
                                     </select>
                                 </div>
 
-
                                 <div className="opcao-com-select">
                                     <label className="label-radio">
                                         <input type="radio" name="filhos" value="nao" checked={temFilhos === 'nao'} onChange={handleTemFilhosChange} />
@@ -209,7 +176,6 @@ function FormularioBloco3Pagina1() {
                             </div>
                             {erros.temFilhos && <div className="error-message">{erros.temFilhos}</div>}
                         </div>
-
 
                         {temFilhos.startsWith('sim') && (
                             <div className="form-group">
@@ -234,7 +200,6 @@ function FormularioBloco3Pagina1() {
                             </div>
                         )}
 
-                        {/* Navegação Paginada */}
                         <div className="paginacao">
                             <Link to="/bloco2/page3" className="paginacao-btn">{'<'}</Link>
                             <span className="paginacao-atual">1</span>
