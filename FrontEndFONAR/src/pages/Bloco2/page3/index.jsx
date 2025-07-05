@@ -2,22 +2,6 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './style.css';
 
-const MenuLateral = ({ aberto, onToggle }) => (
-    <aside className={`menu-lateral${aberto ? ' aberto' : ''}`}>
-        <button className="btn-menu" onClick={onToggle}>
-            <span className="menu-icone">&#9776;</span>
-        </button>
-        <nav className="menu-links">
-            {aberto && (
-                <>
-                    <a href="#" className="menu-item">#</a>
-                    <a href="#" className="menu-item">#</a>
-                    <a href="#" className="menu-item">#</a>
-                </>
-            )}
-        </nav>
-    </aside>
-);
 
 const Etapas = () => (
     <div className="etapas-container">
@@ -61,7 +45,6 @@ const Etapas = () => (
 );
 
 function FormularioBloco2Pagina3() {
-    const [menuAberto, setMenuAberto] = useState(false);
     const [usoDrogasAlcool, setUsoDrogasAlcool] = useState('');
     const [doencaMental, setDoencaMental] = useState('');
     const [descumpriuMedida, setDescumpriuMedida] = useState('');
@@ -99,7 +82,6 @@ function FormularioBloco2Pagina3() {
 
     return (
         <div className="pagina-fonar">
-            <MenuLateral aberto={menuAberto} onToggle={() => setMenuAberto(!menuAberto)} />
             <div className="dados-da-vitima">
                 <h1 className="titulo-fonar">Formulário FONAR</h1>
                 <Etapas />
