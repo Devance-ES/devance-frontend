@@ -2,23 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './style.css';
 
-const MenuLateral = ({ aberto, onToggle }) => (
-  <aside className={`menu-lateral${aberto ? ' aberto' : ''}`}>
-    <button className="btn-menu" onClick={onToggle}>
-      <span className="menu-icone">&#9776;</span>
-    </button>
-    <nav className="menu-links">
-      {aberto && (
-        <>
-          <a href="#!" className="menu-item">#</a>
-          <a href="#!" className="menu-item">#</a>
-          <a href="#!" className="menu-item">#</a>
-        </>
-      )}
-    </nav>
-  </aside>
-);
-
 const Etapas = () => (
   <div className="etapas-container">
     <div className="etapas">
@@ -39,21 +22,18 @@ const Etapas = () => (
 
 function FormularioBloco3Pagina3() {
   const navigate = useNavigate();
-  const [menuAberto, setMenuAberto] = useState(false);
 
   // --- Estados para os campos do formulário ---
   const [suicidio, setSuicidio] = useState('');
   const [financeiro, setFinanceiro] = useState('');
   const [arma, setArma] = useState('');
-  // --- Novos estados para a pergunta adicionada ---
   const [ameacouTerceiros, setAmeacouTerceiros] = useState('');
-  const [especificacaoAmeaca, setEspecificacaoAmeaca] = useState([]); // Array para checkboxes
+  const [especificacaoAmeaca, setEspecificacaoAmeaca] = useState([]);
 
-  // --- Estados para validação ---
+  // --- Validação ---
   const [erros, setErros] = useState({});
   const [isFormValid, setIsFormValid] = useState(false);
 
-  // --- Função de validação atualizada ---
   const validateForm = () => {
     const currentErros = {};
     let valid = true;
@@ -70,12 +50,10 @@ function FormularioBloco3Pagina3() {
       currentErros.arma = 'Selecione uma opção.';
       valid = false;
     }
-    // Validação da nova pergunta
     if (!ameacouTerceiros) {
       currentErros.ameacouTerceiros = 'Selecione uma opção.';
       valid = false;
     } else if (ameacouTerceiros === 'sim' && especificacaoAmeaca.length === 0) {
-      // Se "Sim" for selecionado, a especificação é obrigatória
       currentErros.ameacouTerceiros = 'Por favor, especifique quem foi ameaçado ou agredido.';
       valid = false;
     }
@@ -84,22 +62,19 @@ function FormularioBloco3Pagina3() {
     return valid;
   };
 
-  // --- Efeito para re-validar o formulário a cada mudança ---
   useEffect(() => {
     setIsFormValid(validateForm());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [suicidio, financeiro, arma, ameacouTerceiros, especificacaoAmeaca]);
 
-  // Handler para limpar a especificação se a resposta principal mudar
   const handleAmeacaChange = (e) => {
     const { value } = e.target;
     setAmeacouTerceiros(value);
     if (value !== 'sim') {
-      setEspecificacaoAmeaca([]); // Limpa as especificações se a resposta não for "Sim"
+      setEspecificacaoAmeaca([]);
     }
   };
 
-  // Handler para os checkboxes da especificação
   const handleEspecificacaoChange = (e) => {
     const { value, checked } = e.target;
     if (checked) {
@@ -113,7 +88,7 @@ function FormularioBloco3Pagina3() {
     e.preventDefault();
     if (validateForm()) {
       console.log("Formulário Bloco 3 Página 3 válido!");
-      navigate('/bloco4/page1'); // Navega para o próximo bloco
+      navigate('/bloco4/page1');
     } else {
       console.log("Por favor, preencha todos os campos obrigatórios.");
     }
@@ -121,15 +96,12 @@ function FormularioBloco3Pagina3() {
 
   return (
     <div className="pagina-fonar">
-      <MenuLateral aberto={menuAberto} onToggle={() => setMenuAberto(!menuAberto)} />
-
-      <div className="conteudo-principal" style={{ marginLeft: menuAberto ? '220px' : '72px' }}>
+      <div className="conteudo-principal">
         <h1 className="titulo-fonar">Formulário FONAR</h1>
         <Etapas />
 
         <div className="form-container">
           <form onSubmit={handleNextPage}>
-            {/* Pergunta 1: Tentativa de suicídio */}
             <div className="form-group">
               <label className="pergunta">O(A) agressor(a) já tentou suicídio ou falou em suicidar-se?</label>
               <div className="opcoes">
@@ -139,7 +111,6 @@ function FormularioBloco3Pagina3() {
               {erros.suicidio && <div className="error-message">{erros.suicidio}</div>}
             </div>
 
-            {/* Pergunta 2: Dificuldades financeiras */}
             <div className="form-group">
               <label className="pergunta">O(A) agressor(a) está desempregado ou tem dificuldades financeiras?</label>
               <div className="opcoes">
@@ -150,7 +121,6 @@ function FormularioBloco3Pagina3() {
               {erros.financeiro && <div className="error-message">{erros.financeiro}</div>}
             </div>
 
-            {/* Pergunta 3: Acesso a armas de fogo */}
             <div className="form-group">
               <label className="pergunta">O(A) agressor(a) tem acesso a armas de fogo?</label>
               <div className="opcoes">
@@ -161,19 +131,16 @@ function FormularioBloco3Pagina3() {
               {erros.arma && <div className="error-message">{erros.arma}</div>}
             </div>
 
-            {/* ================================================================ */}
-            {/* NOVA PERGUNTA ADICIONADA AQUI                                    */}
-            {/* ================================================================ */}
             <div className="form-group">
-              <label className="pergunta">O(A) agressor(a) já ameaçou ou agrediu seus filhos, outros familiares, amigos, colegas de trabalho, pessoas desconhecidas ou animais de estimação?</label>
+              <label className="pergunta">
+                O(A) agressor(a) já ameaçou ou agrediu seus filhos, outros familiares, amigos, colegas de trabalho, pessoas desconhecidas ou animais de estimação?
+              </label>
               <div className="opcoes">
-                {/* Opção SIM */}
                 <label>
                   <input type="radio" name="ameacou-terceiros" value="sim" checked={ameacouTerceiros === 'sim'} onChange={handleAmeacaChange} />
                   Sim. Especifique:
                 </label>
 
-                {/* Sub-opções condicionais (Checkboxes) */}
                 {ameacouTerceiros === 'sim' && (
                   <div className="sub-opcoes" style={{ paddingLeft: '2rem' }}>
                     <label>
@@ -195,12 +162,10 @@ function FormularioBloco3Pagina3() {
                   </div>
                 )}
 
-                {/* Opção NÃO */}
                 <label>
                   <input type="radio" name="ameacou-terceiros" value="nao" checked={ameacouTerceiros === 'nao'} onChange={handleAmeacaChange} />
                   Não
                 </label>
-                {/* Opção NÃO SEI */}
                 <label>
                   <input type="radio" name="ameacou-terceiros" value="nao-sei" checked={ameacouTerceiros === 'nao-sei'} onChange={handleAmeacaChange} />
                   Não sei
@@ -209,8 +174,6 @@ function FormularioBloco3Pagina3() {
               {erros.ameacouTerceiros && <div className="error-message">{erros.ameacouTerceiros}</div>}
             </div>
 
-
-            {/* --- Navegação Paginada --- */}
             <div className="paginacao">
               <Link to="/bloco3/page2" className="paginacao-btn">{'<'}</Link>
               <Link to="/bloco3/page1" className="paginacao-outro">1</Link>
