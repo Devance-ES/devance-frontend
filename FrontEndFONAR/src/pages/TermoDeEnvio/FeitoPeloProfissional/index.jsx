@@ -2,23 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './style.css';
 
-const MenuLateral = ({ aberto, onToggle }) => (
-    <aside className={`menu-lateral${aberto ? ' aberto' : ''}`}>
-        <button className="btn-menu" onClick={onToggle}>
-            <span className="menu-icone">&#9776;</span>
-        </button>
-        <nav className="menu-links">
-            {aberto && (
-                <>
-                    <a href="#!" className="menu-item">#</a>
-                    <a href="#!" className="menu-item">#</a>
-                    <a href="#!" className="menu-item">#</a>
-                </>
-            )}
-        </nav>
-    </aside>
-);
-
 const Etapas = () => (
     <div className="etapas-container">
         <div className="etapas">
@@ -36,7 +19,6 @@ const Etapas = () => (
         </div>
     </div>
 );
-
 
 // Estilo customizado para o botão de envio
 const botaoEnviarStyle = {
@@ -59,17 +41,14 @@ const botaoEnviarDesabilitadoStyle = {
     opacity: 0.7
 };
 
-
 function PreenchimentoProfissional() {
     const navigate = useNavigate();
-    const [menuAberto, setMenuAberto] = useState(false);
     const [modoPreenchimento, setModoPreenchimento] = useState('');
     const [isFormValid, setIsFormValid] = useState(false);
 
     useEffect(() => {
         setIsFormValid(modoPreenchimento !== '');
     }, [modoPreenchimento]);
-
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -95,23 +74,59 @@ function PreenchimentoProfissional() {
 
     return (
         <div className="pagina-fonar">
-            <MenuLateral aberto={menuAberto} onToggle={() => setMenuAberto(!menuAberto)} />
+            {/* MenuLateral removido completamente */}
 
             <div className="conteudo-principal" style={{ justifyContent: 'flex-start', paddingTop: '5vh' }}>
                 <h1 className="titulo-fonar">Formulário FONAR</h1>
                 <Etapas />
+
                 <div className="form-container" style={{ marginTop: '50px' }}>
                     <form onSubmit={handleSubmit}>
                         <div className="form-group">
                             <label className="pergunta" style={{ fontSize: '20px', textAlign: 'center' }}>
                                 Preenchimento pelo profissional:
                             </label>
-                            <div className="opcoes" style={{ marginTop: '20px', alignItems: 'flex-start', display: 'flex', flexDirection: 'column', margin: '0 auto', maxWidth: '500px' }}>
-                                <label><input type="radio" name="modo-preenchimento" value="sem_ajuda" checked={modoPreenchimento === 'sem_ajuda'} onChange={e => setModoPreenchimento(e.target.value)} /> Vítima respondeu a este formulário sem ajuda profissional.</label>
-                                <label><input type="radio" name="modo-preenchimento" value="com_ajuda" checked={modoPreenchimento === 'com_ajuda'} onChange={e => setModoPreenchimento(e.target.value)} /> Vítima respondeu a este formulário com auxílio profissional.</label>
-                                <label><input type="radio" name="modo-preenchimento" value="sem_condicoes" checked={modoPreenchimento === 'sem_condicoes'} onChange={e => setModoPreenchimento(e.target.value)} /> Vítima não teve condições de responder a este formulário.</label>
-                                <label><input type="radio" name="modo-preenchimento" value="recusou" checked={modoPreenchimento === 'recusou'} onChange={e => setModoPreenchimento(e.target.value)} /> Vítima recusou-se a preencher o formulário.</label>
-                                <label><input type="radio" name="modo-preenchimento" value="terceiro" checked={modoPreenchimento === 'terceiro'} onChange={e => setModoPreenchimento(e.target.value)} /> Terceiro comunicante respondeu a este formulário.</label>
+                            <div
+                                className="opcoes"
+                                style={{
+                                    marginTop: '20px',
+                                    alignItems: 'flex-start',
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    margin: '0 auto',
+                                    maxWidth: '500px'
+                                }}
+                            >
+                                <label>
+                                    <input type="radio" name="modo-preenchimento" value="sem_ajuda"
+                                           checked={modoPreenchimento === 'sem_ajuda'}
+                                           onChange={e => setModoPreenchimento(e.target.value)} />
+                                    Vítima respondeu a este formulário sem ajuda profissional.
+                                </label>
+                                <label>
+                                    <input type="radio" name="modo-preenchimento" value="com_ajuda"
+                                           checked={modoPreenchimento === 'com_ajuda'}
+                                           onChange={e => setModoPreenchimento(e.target.value)} />
+                                    Vítima respondeu a este formulário com auxílio profissional.
+                                </label>
+                                <label>
+                                    <input type="radio" name="modo-preenchimento" value="sem_condicoes"
+                                           checked={modoPreenchimento === 'sem_condicoes'}
+                                           onChange={e => setModoPreenchimento(e.target.value)} />
+                                    Vítima não teve condições de responder a este formulário.
+                                </label>
+                                <label>
+                                    <input type="radio" name="modo-preenchimento" value="recusou"
+                                           checked={modoPreenchimento === 'recusou'}
+                                           onChange={e => setModoPreenchimento(e.target.value)} />
+                                    Vítima recusou-se a preencher o formulário.
+                                </label>
+                                <label>
+                                    <input type="radio" name="modo-preenchimento" value="terceiro"
+                                           checked={modoPreenchimento === 'terceiro'}
+                                           onChange={e => setModoPreenchimento(e.target.value)} />
+                                    Terceiro comunicante respondeu a este formulário.
+                                </label>
                             </div>
                         </div>
 
@@ -126,14 +141,10 @@ function PreenchimentoProfissional() {
                         </div>
                     </form>
 
-                    {/* ================================== */}
-                    {/* BOTÃO VOLTAR ADICIONADO AQUI     */}
-                    {/* ================================== */}
+                    {/* Botão de voltar */}
                     <div className="paginacao" style={{ justifyContent: 'flex-start', marginTop: '60px' }}>
-                        {/* Este link leva para a página inicial. Ajuste a rota se necessário. */}
                         <Link to="/" className="paginacao-btn">{'< Voltar'}</Link>
                     </div>
-
                 </div>
             </div>
         </div>
