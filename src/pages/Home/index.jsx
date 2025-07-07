@@ -3,6 +3,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import './style.css';
 
 const Home = () => {
+
+    const navigate = useNavigate();
+
     return (
         <div className="home-container">
             {/* Cabeçalho da Home Modificado */}
@@ -15,7 +18,7 @@ const Home = () => {
 
                 {/* Navegação com os botões */}
                 <nav className="home-nav-buttons">
-                    <button className="btn-header">Preencher formulário</button>
+                    <button className="btn-header" onClick={() => navigate('/bloco1/page1')}>Preencher formulário</button>
                     <button className="btn-header">Login</button>
                 </nav>
             </header>
