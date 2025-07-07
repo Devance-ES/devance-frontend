@@ -1,19 +1,12 @@
-# Devance - FONAR
-Este projeto tem como objetivo principal a digitalização do Formulário Nacional de Avaliação de Risco (FONAR), atualmente preenchido exclusivamente em formato físico. A proposta visa padronizar, centralizar e ampliar o acesso às informações relativas ao risco de violência contra a mulher, promovendo maior eficácia no acompanhamento dos casos e na formulação de políticas públicas preventivas.
+# React + Vite
 
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## 🛠️ Construído com
+Currently, two official plugins are available:
 
-* [React](https://code.visualstudio.com/) - Biblioteca JavaScript
-* [NPM](https://npmjs.com/) - Gerenciador de Pacotes
-* [VSCode](https://code.visualstudio.com/) - IDE usada pelo time
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## ✒️ Autores
+## Expanding the ESLint configuration
 
-* **Alison Guilherme da Silva Ferreira** 
-* **Antônio Chaves Patriota**
-* **João Pedro Oliveira da Silva**
-* **Juarez Damião Lopes Filho** 
-* **Luiz Felipe Pereira da Silva**
-* **Mateus Abdias dos Santos Silva**
-* **Rony Elias de Oliveira**
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
