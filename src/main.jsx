@@ -1,7 +1,7 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Home from './pages/home';
+import Home from './pages/Home';
 import DadosDaVitima from './pages/IdentficacaoPorPartes/DadosDaVitima';
 import DadosDoAgressor from './pages/IdentficacaoPorPartes/DadosDoAgressor';
 import VinculoEntrePartes from './pages/IdentficacaoPorPartes/VinculeEntrePartes';
@@ -23,7 +23,7 @@ import PreenchimentoProfissional from './pages/TermoDeEnvio/FeitoPeloProfissiona
 function App() {
   return (
     <Routes>
-      <Route path="/home" element={<Home />} />
+      <Route path="" element={<Home />} />
       <Route path="/identificacaoporpartes/dadosdavitima" element={<DadosDaVitima />} />
       <Route path="/identificacaoporpartes/dadosdoagressor" element={<DadosDoAgressor />} />
       <Route path="/identificacaoporpartes/vinculoentrepartes" element={<VinculoEntrePartes />} />
