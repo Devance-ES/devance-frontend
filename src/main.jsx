@@ -23,7 +23,7 @@ import PreenchimentoProfissional from './pages/TermoDeEnvio/FeitoPeloProfissiona
 function App() {
   return (
     <Routes>
-      <Route path="/home" element={<Home />} />
+      <Route path="" element={<Home />} />
       <Route path="/identificacaoporpartes/dadosdavitima" element={<DadosDaVitima />} />
       <Route path="/identificacaoporpartes/dadosdoagressor" element={<DadosDoAgressor />} />
       <Route path="/identificacaoporpartes/vinculoentrepartes" element={<VinculoEntrePartes />} />
