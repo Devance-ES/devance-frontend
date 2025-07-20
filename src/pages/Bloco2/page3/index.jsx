@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './style.css';
-
 
 const Etapas = () => (
     <div className="etapas-container">
@@ -18,13 +17,10 @@ const Etapas = () => (
                 <div className="etapa-titulo">Bloco I</div>
             </div>
             <div className="linha completed"></div>
-
-
             <div className="etapa active">
                 <span>3</span>
                 <div className="etapa-titulo">Bloco II</div>
             </div>
-
             <div className="linha"></div>
             <div className="etapa">
                 <span>4</span>
@@ -50,6 +46,8 @@ function FormularioBloco2Pagina3() {
     const [descumpriuMedida, setDescumpriuMedida] = useState('');
     const [erros, setErros] = useState({});
 
+    const navigate = useNavigate();
+
     const validarCampos = () => {
         let valid = true;
         let newErros = {};
@@ -71,10 +69,11 @@ function FormularioBloco2Pagina3() {
         return valid;
     };
 
-    const handleNextPage = (e) => {
+    const handleProximaPagina = (e) => {
         e.preventDefault();
         if (validarCampos()) {
-            console.log("Formulário Bloco II Página 1 válido!");
+            console.log("Formulário Bloco II Página 3 válido!");
+            navigate('/bloco3/page1');
         } else {
             console.log("Por favor, preencha todos os campos obrigatórios.");
         }
@@ -86,7 +85,7 @@ function FormularioBloco2Pagina3() {
                 <h1 className="titulo-fonar">Formulário FONAR</h1>
                 <Etapas />
                 <div className="form-container">
-                    <form onSubmit={handleNextPage}>
+                    <form onSubmit={handleProximaPagina}>
                         <div className="form-group">
                             <label className="pergunta">
                                 O(A) agressor(a) faz uso abusivo de álcool ou de drogas?
@@ -215,7 +214,13 @@ function FormularioBloco2Pagina3() {
                             <Link to="/bloco2/page1" className="paginacao-outro">1</Link>
                             <Link to="/bloco2/page2" className="paginacao-outro">2</Link>
                             <span className="paginacao-atual">3</span>
-                            <button type="submit" className="paginacao-btn">{'>'}</button>
+                            <button
+                                type="button"
+                                className="paginacao-btn"
+                                onClick={handleProximaPagina}
+                            >
+                                {'>'}
+                            </button>
                         </div>
                     </form>
                 </div>
