@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './style.css';
 
-// Barra de etapas atualizada para o Bloco IV
 const Etapas = () => (
     <div className="etapas-container">
         <div className="etapas">
@@ -24,16 +23,13 @@ const Etapas = () => (
 function FormularioBloco4Pagina1() {
     const navigate = useNavigate();
 
-    // --- Estados para os campos do formulário ---
     const [moraEmRisco, setMoraEmRisco] = useState('');
     const [dependenteFinanceiramente, setDependenteFinanceiramente] = useState('');
     const [aceitaAbrigamento, setAceitaAbrigamento] = useState('');
 
-    // --- Estados para validação ---
     const [erros, setErros] = useState({});
     const [isFormValid, setIsFormValid] = useState(false);
 
-    // --- Função de validação ---
     const validateForm = () => {
         const currentErros = {};
         let valid = true;
@@ -55,17 +51,15 @@ function FormularioBloco4Pagina1() {
         return valid;
     };
 
-    // --- Revalida o formulário sempre que os campos mudam ---
     useEffect(() => {
         setIsFormValid(validateForm());
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [moraEmRisco, dependenteFinanceiramente, aceitaAbrigamento]);
 
     const handleNextPage = (e) => {
         e.preventDefault();
         if (validateForm()) {
             console.log("Formulário Bloco 4 Página 1 válido!");
-            navigate('/termo-de-envio');
+            navigate('/termo-de-envio/feito-pela-vitima');  // caminho atualizado aqui
         } else {
             console.log("Por favor, preencha todos os campos obrigatórios.");
         }
@@ -73,8 +67,6 @@ function FormularioBloco4Pagina1() {
 
     return (
         <div className="pagina-fonar">
-            {/* Menu lateral REMOVIDO */}
-
             <div className="conteudo-principal">
                 <h1 className="titulo-fonar">Formulário FONAR</h1>
                 <Etapas />
@@ -131,7 +123,6 @@ function FormularioBloco4Pagina1() {
                             {erros.aceitaAbrigamento && <div className="error-message">{erros.aceitaAbrigamento}</div>}
                         </div>
 
-                        {/* Navegação Paginada */}
                         <div className="paginacao">
                             <Link to="/bloco3/page5" className="paginacao-btn">{'<'}</Link>
                             <span className="paginacao-atual">1</span>
