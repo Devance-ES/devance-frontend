@@ -23,14 +23,12 @@ const Etapas = () => (
 function FormularioBloco3Pagina3() {
   const navigate = useNavigate();
 
-  // --- Estados para os campos do formulário ---
   const [suicidio, setSuicidio] = useState('');
   const [financeiro, setFinanceiro] = useState('');
   const [arma, setArma] = useState('');
   const [ameacouTerceiros, setAmeacouTerceiros] = useState('');
   const [especificacaoAmeaca, setEspecificacaoAmeaca] = useState([]);
 
-  // --- Validação ---
   const [erros, setErros] = useState({});
   const [isFormValid, setIsFormValid] = useState(false);
 
@@ -88,7 +86,7 @@ function FormularioBloco3Pagina3() {
     e.preventDefault();
     if (validateForm()) {
       console.log("Formulário Bloco 3 Página 3 válido!");
-      navigate('/bloco4/page1');
+      navigate('/bloco3/page4'); // ✅ Aqui está o redirecionamento corrigido
     } else {
       console.log("Por favor, preencha todos os campos obrigatórios.");
     }
