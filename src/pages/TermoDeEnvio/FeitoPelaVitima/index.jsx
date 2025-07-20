@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './style.css';
 
-// Barra de etapas atualizada para a etapa final
 const Etapas = () => (
     <div className="etapas-container">
         <div className="etapas">
@@ -21,7 +20,6 @@ const Etapas = () => (
     </div>
 );
 
-// Estilo customizado para o botão de envio
 const botaoEnviarStyle = {
     backgroundColor: '#8e44ad',
     color: 'white',
@@ -50,7 +48,7 @@ function TermoDeEnvioVitima() {
         e.preventDefault();
         if (concordouTermos) {
             console.log("Formulário ENVIADO COM SUCESSO!");
-            navigate('/sucesso');
+            navigate('/termo-de-envio/feito-pelo-profissional');  // caminho atualizado aqui
         } else {
             console.log("É necessário concordar com os termos para enviar.");
         }
@@ -58,8 +56,6 @@ function TermoDeEnvioVitima() {
 
     return (
         <div className="pagina-fonar">
-            {/* MenuLateral removido completamente */}
-
             <div className="conteudo-principal">
                 <Etapas />
                 <div className="form-container" style={{ textAlign: 'center' }}>
@@ -95,7 +91,6 @@ function TermoDeEnvioVitima() {
                         </button>
                     </form>
 
-                    {/* Navegação para voltar */}
                     <div className="paginacao" style={{ justifyContent: 'flex-start', marginTop: '60px' }}>
                         <Link to="/bloco4/page1" className="paginacao-btn">{'< Voltar'}</Link>
                     </div>
