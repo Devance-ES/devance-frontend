@@ -1,29 +1,25 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom'; // Link é importado mas não usado nesta opção
 import './style.css';
 
 const Home = () => {
-
     const navigate = useNavigate();
 
     return (
         <div className="home-container">
-            {/* Cabeçalho da Home Modificado */}
             <header className="home-header">
-                {/* Seção do título e subtítulo */}
                 <div className="home-logo-section">
                     <h1 className="fonar-main-title">FONAR</h1>
                     <p className="fonar-subtitle">Formulário Nacional de Avaliação de Risco</p>
                 </div>
 
-                {/* Navegação com os botões */}
                 <nav className="home-nav-buttons">
                     <button className="btn-header" onClick={() => navigate('/bloco1/page1')}>Preencher formulário</button>
-                    <button className="btn-header">Login</button>
+                    {}
+                    <button className="btn-header" onClick={() => navigate('/login')}>Login</button>
                 </nav>
             </header>
 
-            {/* Conteúdo principal da Home (mantido como estava) */}
             <main className="home-main-content">
                 <h1 className="main-title">O que é FONAR ?</h1>
                 <p className="main-text">
