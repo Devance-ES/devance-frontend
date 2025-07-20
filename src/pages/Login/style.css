@@ -1,0 +1,221 @@
+/* login.css */
+
+/* Variáveis CSS (opcional, mas recomendado para cores) */
+:root {
+    --primary-purple: #6a2a89; /* Cor principal, similar ao da imagem */
+    --light-purple: #F3EDF5; /* Um roxo mais claro para o fundo */
+    --text-color: #333;
+    --placeholder-color: #999;
+    --border-color: #ccc;
+    --button-hover: #5a2278; /* Um roxo um pouco mais escuro para hover */
+}
+
+.login-container {
+    display: flex;
+    height: 100vh;
+    font-family: Arial, sans-serif; /* Ou sua fonte preferida */
+    color: var(--text-color);
+}
+
+/* Seção do Formulário (lado esquerdo) */
+.login-form-section {
+    flex: 1; /* Ocupa 1 parte da tela */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: #fff; /* Fundo branco para o formulário */
+}
+
+.login-title {
+    font-size: 2em;
+    margin-bottom: 40px;
+    color: var(--text-color);
+}
+
+.login-form {
+    width: 100%;
+    max-width: 400px; /* Largura máxima para o formulário */
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.9em;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.form-group input[type="email"],
+.form-group input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    border: none; /* Remove a borda padrão */
+    border-bottom: 1px solid var(--border-color); /* Adiciona borda inferior */
+    font-size: 1em;
+    outline: none; /* Remove o contorno ao focar */
+}
+
+.form-group input::placeholder {
+    color: var(--placeholder-color);
+}
+
+.password-input-wrapper {
+    position: relative;
+    display: flex; /* Para alinhar o input e o ícone */
+    align-items: center;
+}
+
+.password-input-wrapper input {
+    flex-grow: 1; /* Faz o input ocupar o espaço restante */
+}
+
+.password-toggle {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+    color: var(--placeholder-color);
+}
+
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    font-size: 0.85em;
+}
+
+.remember-me input[type="checkbox"] {
+    margin-right: 5px;
+    accent-color: var(--primary-purple); /* Cor do checkbox */
+}
+
+.forgot-password-link {
+    color: var(--primary-purple);
+    text-decoration: none;
+}
+
+.forgot-password-link:hover {
+    text-decoration: underline;
+}
+
+.login-button {
+    width: 100%;
+    padding: 15px;
+    background-color: var(--primary-purple);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.login-button:hover {
+    background-color: var(--button-hover);
+}
+
+/* Seção de Branding (lado direito) */
+.login-branding-section {
+    flex: 1; /* Ocupa 1 parte da tela */
+    background-color: var(--primary-purple);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    position: relative; /* Para posicionar o botão de voltar */
+    padding: 20px;
+    text-align: center;
+}
+
+.back-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: rgba(255, 255, 255, 0.2); /* Fundo semi-transparente para o botão */
+    border: none;
+    border-radius: 50%; /* Faz um círculo */
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.branding-title {
+    font-size: 4em; /* FONAR em tamanho grande */
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.branding-subtitle {
+    font-size: 2em; /* Login em tamanho menor */
+    margin-top: 0;
+    font-weight: normal;
+}
+
+/* Media Queries para Responsividade */
+@media (max-width: 768px) {
+    .login-container {
+        flex-direction: column; /* Empilha as seções em telas menores */
+    }
+
+    .login-form-section,
+    .login-branding-section {
+        flex: none; /* Remove o flex-grow */
+        width: 100%;
+        min-height: 50vh; /* Ajuste a altura conforme necessário */
+    }
+
+    .login-form-section {
+        order: 2; /* Formulário abaixo do branding em telas pequenas */
+    }
+
+    .login-branding-section {
+        order: 1; /* Branding acima do formulário */
+        padding-top: 60px; /* Espaço para o botão de voltar */
+    }
+
+    .back-button {
+        top: 20px;
+        left: 20px; /* Mantém a posição */
+    }
+
+    .branding-title {
+        font-size: 3em;
+    }
+
+    .branding-subtitle {
+        font-size: 1.5em;
+    }
+}
+
+@media (max-width: 480px) {
+    .login-title {
+        font-size: 1.5em;
+        margin-bottom: 20px;
+    }
+
+    .login-form {
+        padding: 0 15px; /* Adiciona algum padding nas bordas */
+    }
+
+    .branding-title {
+        font-size: 2.5em;
+    }
+
+    .branding-subtitle {
+        font-size: 1.2em;
+    }
+}
