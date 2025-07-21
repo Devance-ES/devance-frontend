@@ -44,7 +44,7 @@ const Dados = () => {
             <section className="dados-welcome-section">
                 <div className="dados-welcome-content">
                     <h2 className="dados-welcome-title">Bem vindo</h2>
-                    <p className="dados-welcome-user">Olá, Paulo Silva</p>
+                    <p className="dados-welcome-user">Olá, Alison Guilherme</p>
                 </div>
             </section>
 
