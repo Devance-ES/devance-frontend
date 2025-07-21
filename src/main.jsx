@@ -22,15 +22,18 @@ import PreenchimentoProfissional from './pages/TermoDeEnvio/FeitoPeloProfissiona
 import Login from './pages/Login/Login'; // Ajuste o caminho se o nome do arquivo for diferente de 'Login.jsx'
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Analytics from './pages/Analytics/analytics';
+import Dados from './pages/Dados/dados';
+
+
 
 function App() {
   return (
     <Routes>
       <Route path="" element={<Home />} />
-      {/* ➡️ Adicione a rota para o Login aqui */}
       <Route path="/login" element={<Login />} />
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/analytics" element={<Analytics />} />
+      <Route path="/dados" element={<Dados />} /> 
       <Route path="/identificacaoporpartes/dadosdavitima" element={<DadosDaVitima />} />
       <Route path="/identificacaoporpartes/dadosdoagressor" element={<DadosDoAgressor />} />
       <Route path="/identificacaoporpartes/vinculoentrepartes" element={<VinculoEntrePartes />} />
