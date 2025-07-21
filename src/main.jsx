@@ -21,6 +21,7 @@ import TermoDeEnvioVitima from './pages/TermoDeEnvio/FeitoPelaVitima';
 import PreenchimentoProfissional from './pages/TermoDeEnvio/FeitoPeloProfissional';
 import Login from './pages/Login/Login'; // Ajuste o caminho se o nome do arquivo for diferente de 'Login.jsx'
 import Dashboard from "./pages/Dashboard/Dashboard";
+import Analytics from './pages/Analytics/analytics';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
       {/* ➡️ Adicione a rota para o Login aqui */}
       <Route path="/login" element={<Login />} />
       <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/analytics" element={<Analytics />} />
       <Route path="/identificacaoporpartes/dadosdavitima" element={<DadosDaVitima />} />
       <Route path="/identificacaoporpartes/dadosdoagressor" element={<DadosDoAgressor />} />
       <Route path="/identificacaoporpartes/vinculoentrepartes" element={<VinculoEntrePartes />} />
