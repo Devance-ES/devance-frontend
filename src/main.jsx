@@ -19,8 +19,8 @@ import FormularioBloco3Pagina5 from './pages/Bloco3/page5';
 import FormularioBloco4Pagina1 from './pages/Bloco4/page1';
 import TermoDeEnvioVitima from './pages/TermoDeEnvio/FeitoPelaVitima';
 import PreenchimentoProfissional from './pages/TermoDeEnvio/FeitoPeloProfissional';
-// ➡️ Importe o componente Login aqui
 import Login from './pages/Login/Login'; // Ajuste o caminho se o nome do arquivo for diferente de 'Login.jsx'
+import Dashboard from "./pages/Dashboard/Dashboard";
 
 function App() {
   return (
@@ -28,6 +28,7 @@ function App() {
       <Route path="" element={<Home />} />
       {/* ➡️ Adicione a rota para o Login aqui */}
       <Route path="/login" element={<Login />} />
+      <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/identificacaoporpartes/dadosdavitima" element={<DadosDaVitima />} />
       <Route path="/identificacaoporpartes/dadosdoagressor" element={<DadosDoAgressor />} />
       <Route path="/identificacaoporpartes/vinculoentrepartes" element={<VinculoEntrePartes />} />
