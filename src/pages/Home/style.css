@@ -26,12 +26,10 @@
 .home-logo-section {
     display: flex;
     flex-direction: column;
-    /* Organiza o título e subtítulo verticalmente */
     align-items: flex-start;
     /* Alinha à esquerda */
 }
 
-/* Novo estilo para o título principal "FONAR" */
 .fonar-main-title {
     font-size: 4.5rem;
     /* Tamanho grande */

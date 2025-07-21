@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom'; // Link é importado mas não usado nesta opção
+import { Link, useNavigate } from 'react-router-dom'; 
 import './style.css';
 
 const Home = () => {

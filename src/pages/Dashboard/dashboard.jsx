@@ -1,11 +1,11 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import './style.css'; // Importe o CSS para este componente
+import './style.css'; 
 
 const Dashboard = () => {
     const navigate = useNavigate();
 
-    // Função para lidar com o clique nos cartões de feature
+    
     const handleCardClick = (path) => {
         navigate(path);
     };
@@ -34,11 +34,11 @@ const Dashboard = () => {
                 </nav>
             </header>
 
-            {/* Seção de Boas-vindas */}
+            
             <section className="welcome-section">
                 <div className="welcome-content">
                     <h2 className="welcome-title">Bem vindo</h2>
-                    <p className="welcome-user">Olá, Paulo Silva</p>
+                    <p className="welcome-user">Olá, Alison Guilherme</p>
                 </div>
             </section>
 
