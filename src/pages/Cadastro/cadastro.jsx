@@ -61,7 +61,7 @@ const Cadastro = () => {
             <section className="cadastro-welcome-section">
                 <div className="cadastro-welcome-content">
                     <h2 className="cadastro-welcome-title">Bem vindo</h2>
-                    <p className="cadastro-welcome-user">Olá, Paulo Silva</p>
+                    <p className="cadastro-welcome-user">Olá, Alison Guilherme</p>
                 </div>
             </section>
 
