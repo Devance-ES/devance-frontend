@@ -19,10 +19,11 @@ import FormularioBloco3Pagina5 from './pages/Bloco3/page5';
 import FormularioBloco4Pagina1 from './pages/Bloco4/page1';
 import TermoDeEnvioVitima from './pages/TermoDeEnvio/FeitoPelaVitima';
 import PreenchimentoProfissional from './pages/TermoDeEnvio/FeitoPeloProfissional';
-import Login from './pages/Login/Login'; // Ajuste o caminho se o nome do arquivo for diferente de 'Login.jsx'
+import Login from './pages/Login/Login'; 
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Analytics from './pages/Analytics/analytics';
 import Dados from './pages/Dados/dados';
+import Cadastro from './pages/Cadastro/cadastro';
 
 
 
@@ -34,6 +35,7 @@ function App() {
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/analytics" element={<Analytics />} />
       <Route path="/dados" element={<Dados />} /> 
+      <Route path="/cadastro" element={<Cadastro />} />
       <Route path="/identificacaoporpartes/dadosdavitima" element={<DadosDaVitima />} />
       <Route path="/identificacaoporpartes/dadosdoagressor" element={<DadosDoAgressor />} />
       <Route path="/identificacaoporpartes/vinculoentrepartes" element={<VinculoEntrePartes />} />
