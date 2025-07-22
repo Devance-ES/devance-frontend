@@ -20,7 +20,7 @@ import FormularioBloco4Pagina1 from './pages/Bloco4/page1';
 import TermoDeEnvioVitima from './pages/TermoDeEnvio/FeitoPelaVitima';
 import PreenchimentoProfissional from './pages/TermoDeEnvio/FeitoPeloProfissional';
 import Login from './pages/Login/login'; 
-import Dashboard from "./pages/Dashboard/Dashboard";
+import Dashboard from "./pages/Dashboard/dashboard";
 import Analytics from './pages/Analytics/analytics';
 import Dados from './pages/Dados/dados';
 import Cadastro from './pages/Cadastro/cadastro';
