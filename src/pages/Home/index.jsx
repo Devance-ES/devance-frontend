@@ -14,7 +14,7 @@ const Home = () => {
                 </div>
 
                 <nav className="home-nav-buttons">
-                    <button className="btn-header" onClick={() => navigate('/bloco1/page1')}>Preencher formulário</button>
+                    <button className="btn-header" onClick={() => navigate('/identificacaoporpartes/dadosdavitima')}>Preencher formulário</button>
                     {}
                     <button className="btn-header" onClick={() => navigate('/login')}>Login</button>
                 </nav>
