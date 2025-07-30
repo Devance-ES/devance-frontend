@@ -22,7 +22,7 @@ const Dashboard = () => {
                     <button className="nav-button" onClick={() => navigate('/')}>
                         Página inicial
                     </button>
-                    <button className="nav-button" onClick={() => navigate('/bloco1/page1')}>
+                    <button className="nav-button" onClick={() => navigate('/identificacaoporpartes/dadosdavitima')}>
                         Preencher formulário
                     </button>
                     <button className="nav-button" onClick={() => handleCardClick('/anexar-formulario')}>
