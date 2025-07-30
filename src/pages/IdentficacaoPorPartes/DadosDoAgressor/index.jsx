@@ -1,23 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react'; 
 import { useNavigate } from 'react-router-dom';
 import './style.css';
 
-const MenuLateral = ({ aberto, onToggle }) => (
-    <aside className={`menu-lateral${aberto ? ' aberto' : ''}`}>
-        <button className="btn-menu" onClick={onToggle}>
-            <span className="menu-icone">&#9776;</span>
-        </button>
-        <nav className="menu-links">
-            {aberto && (
-                <>
-                    <a href="#" className="menu-item">#</a>
-                    <a href="#" className="menu-item">#</a>
-                    <a href="#" className="menu-item">#</a>
-                </>
-            )}
-        </nav>
-    </aside>
-);
 
 const Etapas = () => (
     <div className="etapas-container">
@@ -58,19 +42,16 @@ const Etapas = () => (
 );
 
 const DadosDoAgressor = () => {
-    const [menuAberto, setMenuAberto] = useState(false);
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Avança para o próximo passo, ajuste o caminho conforme seu fluxo
         navigate('/identificacaoporpartes/vinculoentrepartes');
     };
 
     return (
         <div className="pagina-fonar">
-            <MenuLateral aberto={menuAberto} onToggle={() => setMenuAberto(!menuAberto)} />
-            <div className="dados-da-vitima">
+            <div className="dados-da-vitima"> 
                 <h1 className="titulo-fonar">Formulário FONAR</h1>
                 <Etapas />
                 <div className="breadcrumbs">

@@ -1,23 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'; 
 import { useNavigate } from 'react-router-dom';
 import '../DadosDoAgressor/style.css';
 
-const MenuLateral = ({ aberto, onToggle }) => (
-    <aside className={`menu-lateral${aberto ? ' aberto' : ''}`}>
-        <button className="btn-menu" onClick={onToggle}>
-            <span className="menu-icone">&#9776;</span>
-        </button>
-        <nav className="menu-links">
-            {aberto && (
-                <>
-                    <a href="#" className="menu-item">#</a>
-                    <a href="#" className="menu-item">#</a>
-                    <a href="#" className="menu-item">#</a>
-                </>
-            )}
-        </nav>
-    </aside>
-);
 
 const Etapas = () => (
     <div className="etapas-container">
@@ -58,8 +42,8 @@ const Etapas = () => (
 );
 
 const VinculeEntrePartes = () => {
-    const [menuAberto, setMenuAberto] = useState(false);
-    const [vinculo, setVinculo] = useState('');
+    
+    const [vinculo, setVinculo] = useState(''); 
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
@@ -69,7 +53,6 @@ const VinculeEntrePartes = () => {
 
     return (
         <div className="pagina-fonar">
-            <MenuLateral aberto={menuAberto} onToggle={() => setMenuAberto(!menuAberto)} />
             <div className="dados-da-vitima">
                 <h1 className="titulo-fonar">Formulário FONAR</h1>
                 <Etapas />
