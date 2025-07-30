@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import './style.css';
+import './style.css'; 
 
 const Etapas = () => (
     <div className="etapas-container">
@@ -20,7 +20,6 @@ const Etapas = () => (
     </div>
 );
 
-// Estilo customizado para o botão de envio
 const botaoEnviarStyle = {
     backgroundColor: '#8e44ad',
     color: 'white',
@@ -45,6 +44,7 @@ function PreenchimentoProfissional() {
     const navigate = useNavigate();
     const [modoPreenchimento, setModoPreenchimento] = useState('');
     const [isFormValid, setIsFormValid] = useState(false);
+    const [showPopup, setShowPopup] = useState(false); 
 
     useEffect(() => {
         setIsFormValid(modoPreenchimento !== '');
@@ -65,17 +65,20 @@ function PreenchimentoProfissional() {
 
         if (podeProsseguir) {
             console.log("Iniciando formulário. Modo:", modoPreenchimento);
-            navigate('/identificacao-partes');
+            setShowPopup(true);
+            setTimeout(() => {
+                setShowPopup(false); 
+                navigate('/'); 
+            }, 2000); // 2 segundos de atraso
         } else {
             console.log("Registro finalizado. Motivo:", modoPreenchimento);
             alert(`Registro finalizado. Motivo: A vítima ${modoPreenchimento === 'sem_condicoes' ? 'não teve condições de responder' : 'recusou-se a preencher'}.`);
+
         }
     };
 
     return (
         <div className="pagina-fonar">
-            {/* MenuLateral removido completamente */}
-
             <div className="conteudo-principal" style={{ justifyContent: 'flex-start', paddingTop: '5vh' }}>
                 <h1 className="titulo-fonar">Formulário FONAR</h1>
                 <Etapas />
@@ -136,7 +139,7 @@ function PreenchimentoProfissional() {
                                 style={isFormValid ? botaoEnviarStyle : botaoEnviarDesabilitadoStyle}
                                 disabled={!isFormValid}
                             >
-                                Enviar formulário
+                                Enviar
                             </button>
                         </div>
                     </form>
@@ -147,6 +150,14 @@ function PreenchimentoProfissional() {
                     </div>
                 </div>
             </div>
+
+            {showPopup && (
+                <div className="popup-overlay">
+                    <div className="popup-content">
+                        Enviado!
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
